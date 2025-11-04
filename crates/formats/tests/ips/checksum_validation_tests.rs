@@ -11,7 +11,7 @@ use std::path::PathBuf;
 
 fn test_rom_path(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../test_roms/ips")
+        .join("../../test_files/ips")
         .join(name)
 }
 
