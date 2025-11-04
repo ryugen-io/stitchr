@@ -15,9 +15,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PPF (PlayStation Patch Format) implementation
 - xdelta format implementation
 - Patch creation functionality (create patches from ROM pairs)
-- MD5, SHA-1, SHA-256 hash algorithms
-- RetroAchievements hash checking
+- SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (create, info, validate)
+
+## [0.1.1] - 2025-11-04
+
+### Added
+- MD5 hash computation for ROM validation
+- RetroAchievements API integration
+- Automatic game lookup by MD5 hash after patching
+- Rate limiting (500ms) for RA API requests
+- Console detection from file extension
+
+### Changed
+- Split hash algorithms into separate modules (md5, crc32)
+- Made retroachievements feature optional (enabled with `--features retroachievements`)
+
+### Technical
+- New dependencies: md5, ureq, serde, serde_json (optional)
+- Modular API client in `features/retroachievements/api.rs`
+- CLI integration in `cli/utils/retroachievements.rs`
 
 ## [0.1.0-patch.1] - 2025-11-04
 
