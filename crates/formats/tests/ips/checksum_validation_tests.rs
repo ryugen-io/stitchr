@@ -39,7 +39,7 @@ fn test_sml2dx_patch_checksum() {
     );
 
     // Load patch
-    let patch_path = test_rom_path("SML2DXv181.ips");
+    let patch_path = test_rom_path("patch.ips");
     let patch = fs::read(&patch_path).expect("Failed to read patch");
 
     // Validate patch checksum
@@ -93,7 +93,7 @@ fn test_original_rom_unchanged() {
 #[test]
 fn test_patch_file_integrity() {
     // Verify patch file hasn't been corrupted
-    let patch_path = test_rom_path("SML2DXv181.ips");
+    let patch_path = test_rom_path("patch.ips");
     let patch = fs::read(&patch_path).expect("Failed to read patch");
     let patch_crc = crc32::compute(&patch);
 
