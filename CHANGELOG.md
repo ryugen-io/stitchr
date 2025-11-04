@@ -18,6 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (create, info, validate)
 
+## [0.1.3] - 2025-11-04
+
+### Added
+- MD5 hash computation tests (empty, known values, binary data)
+- Console detection tests (7 tests covering all supported consoles)
+- CLI library target for testing utilities
+
+### Changed
+- CLI crate now exports lib target alongside binary target
+
 ## [0.1.2] - 2025-11-04
 
 ### Changed
