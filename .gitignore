@@ -15,7 +15,7 @@ Cargo.lock
 .DS_Store
 Thumbs.db
 
-# Test files - ROMs and patches (binary files only, keep READMEs)
+# Test files - ROMs only (patches are committed)
 test_files/**/*.smc
 test_files/**/*.nes
 test_files/**/*.gba
@@ -26,10 +26,5 @@ test_files/**/*.smd
 test_files/**/*.z64
 test_files/**/*.n64
 test_files/**/*.nds
-test_files/**/*.ips
-test_files/**/*.bps
-test_files/**/*.ups
-test_files/**/*.aps
-test_files/**/*.ppf
-test_files/**/*.rup
-test_files/**/*.xdelta
+test_files/**/*.bin
+test_files/**/*.iso
