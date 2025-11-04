@@ -8,6 +8,10 @@ license.workspace = true
 repository.workspace = true
 description = "Command-line interface for ROM patching"
 
+[lib]
+name = "rom_patcher_cli"
+path = "src/lib.rs"
+
 [[bin]]
 name = "rompatch"
 path = "src/main.rs"
