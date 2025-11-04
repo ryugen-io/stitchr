@@ -8,7 +8,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.4"
+version = "0.1.5"
 edition = "2024"
 rust-version = "1.91"
 authors = ["Your Name <your.email@example.com>"]
@@ -19,3 +19,11 @@ repository = "https://github.com/yourusername/rom-patcher-rs"
 # Shared dependencies across crates
 thiserror = "2.0"
 anyhow = "1.0"
+
+[profile.release]
+# Size optimization for release builds
+strip = true          # Strip symbols automatically
+opt-level = "z"       # Optimize for size
+lto = true            # Link-time optimization
+codegen-units = 1     # Better optimization (slower compile)
+panic = "abort"       # Smaller panic handler
