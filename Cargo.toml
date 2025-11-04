@@ -1,0 +1,21 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/core",
+    "crates/formats",
+    "crates/features",
+    "crates/cli",
+]
+
+[workspace.package]
+version = "0.1.0-patch.1"
+edition = "2024"
+rust-version = "1.91"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yourusername/rom-patcher-rs"
+
+[workspace.dependencies]
+# Shared dependencies across crates
+thiserror = "2.0"
+anyhow = "1.0"
