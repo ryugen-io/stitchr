@@ -51,4 +51,16 @@ impl PatchFormat for BpsPatcher {
     fn validate(patch: &[u8]) -> Result<()> {
         validate::validate(patch)
     }
+
+    fn verify(rom: &[u8], patch: &[u8], target: Option<&[u8]>) -> Result<()> {
+        // Verify source ROM checksum
+        helpers::validate_source_crc(rom, patch)?;
+
+        // Verify target ROM checksum if provided
+        if let Some(target_data) = target {
+            helpers::validate_target_crc(target_data, patch)?;
+        }
+
+        Ok(())
+    }
 }
