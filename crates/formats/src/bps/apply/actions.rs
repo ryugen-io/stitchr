@@ -16,6 +16,7 @@ pub struct ActionContext<'a> {
 
 /// Execute SOURCE_READ action
 /// Copies bytes from ROM at current output position (not relative offset!)
+#[inline]
 pub fn source_read(ctx: &mut ActionContext, length: usize) -> Result<()> {
     let source_offset = ctx.target.len(); // Use current output position, not source_relative_offset!
 
@@ -31,6 +32,7 @@ pub fn source_read(ctx: &mut ActionContext, length: usize) -> Result<()> {
 }
 
 /// Execute TARGET_READ action
+#[inline]
 pub fn target_read(ctx: &mut ActionContext, length: usize) -> Result<()> {
     if *ctx.offset + length > ctx.patch.len() {
         return Err(PatchError::UnexpectedEof(
@@ -45,6 +47,7 @@ pub fn target_read(ctx: &mut ActionContext, length: usize) -> Result<()> {
 }
 
 /// Execute SOURCE_COPY action
+#[inline]
 pub fn source_copy(ctx: &mut ActionContext, length: usize) -> Result<()> {
     let (data, bytes_read) = varint::decode(&ctx.patch[*ctx.offset..])
         .map_err(|_| PatchError::InvalidFormat("Invalid SourceCopy offset".to_string()))?;
@@ -69,6 +72,7 @@ pub fn source_copy(ctx: &mut ActionContext, length: usize) -> Result<()> {
 
 /// Execute TARGET_COPY action (RLE-style)
 /// Can have overlapping copies - target grows as we copy!
+#[inline]
 pub fn target_copy(ctx: &mut ActionContext, length: usize) -> Result<()> {
     let (data, bytes_read) = varint::decode(&ctx.patch[*ctx.offset..])
         .map_err(|_| PatchError::InvalidFormat("Invalid TargetCopy offset".to_string()))?;
@@ -85,10 +89,27 @@ pub fn target_copy(ctx: &mut ActionContext, length: usize) -> Result<()> {
 
     let target_offset = *ctx.target_relative_offset as usize;
 
+    // Reserve capacity upfront to avoid reallocations
+    ctx.target.reserve(length);
+
     // Handle overlapping copies (RLE-style) - target grows as we copy
-    for i in 0..length {
-        let byte = ctx.target[target_offset + i];
-        ctx.target.push(byte);
+    // Use extend_from_within for efficient bulk copying
+    let pattern_size = ctx.target.len() - target_offset;
+
+    if pattern_size >= length {
+        // No overlap: simple extend_from_within
+        ctx.target
+            .extend_from_within(target_offset..target_offset + length);
+    } else {
+        // Overlapping copy: double the pattern each iteration for O(log n) performance
+        let mut copied = 0;
+        while copied < length {
+            let available = ctx.target.len() - target_offset;
+            let chunk_size = available.min(length - copied);
+            ctx.target
+                .extend_from_within(target_offset..target_offset + chunk_size);
+            copied += chunk_size;
+        }
     }
 
     *ctx.target_relative_offset += length as i64;
