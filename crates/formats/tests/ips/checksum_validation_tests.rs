@@ -22,7 +22,7 @@ fn test_sml2dx_patch_checksum() {
     const EXPECTED_OUTPUT_CRC32: u32 = 0xf0799017;
 
     // Load original ROM
-    let rom_path = test_rom_path("Super Mario Land 2 - 6 Golden Coins (UE) (V1.0) [!].gb");
+    let rom_path = test_rom_path("test.rom.gb");
     let mut rom = fs::read(&rom_path).expect("Failed to read ROM");
 
     // Validate input ROM checksum
@@ -77,7 +77,7 @@ fn test_sml2dx_patch_checksum() {
 #[test]
 fn test_original_rom_unchanged() {
     // Verify we're using the correct original ROM
-    let rom_path = test_rom_path("Super Mario Land 2 - 6 Golden Coins (UE) (V1.0) [!].gb");
+    let rom_path = test_rom_path("test.rom.gb");
     let rom = fs::read(&rom_path).expect("Failed to read ROM");
     let rom_crc = crc32fast::hash(&rom);
 
