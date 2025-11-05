@@ -15,6 +15,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.2.3] - 2025-11-05
+
+### Changed
+- Binary size optimization: 2.0MB → 1.4MB (30% reduction)
+  - Replaced ureq with minreq (lighter HTTP client with rustls)
+  - Replaced serde_json with optimized manual JSON parser (35 lines)
+  - Zero allocations in JSON parsing (byte-based digit scanning)
+- Refactored RetroAchievements module structure
+  - Split api.rs (151 → 87 lines)
+  - New parser.rs module (37 lines, #[inline] optimized)
+  - Moved tests to integration test file (27 lines)
+  - All files under 200 lines, matches IPS/BPS/UPS patterns
+
+### Technical
+- Manual JSON parser with byte-level scanning for performance
+- Direct string slice parsing without UTF-8 conversion overhead
+- Modular structure improves maintainability
+
 ## [0.2.2] - 2025-11-05
 
 ### Fixed
