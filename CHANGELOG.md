@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.2.8-patch.3] - 2025-11-05
+
+### Changed
+- Modularized BPS apply tests into separate modules
+  - action_tests.rs, mixed_tests.rs, error_tests.rs
+  - Reduced bps/apply_tests.rs from 156 to 3 focused modules
+  - All 28 tests passing
+
 ## [0.2.8-patch.2] - 2025-11-05
 
 ### Changed
