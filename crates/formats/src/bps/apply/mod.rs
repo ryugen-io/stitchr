@@ -23,29 +23,28 @@ pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
         });
     }
 
-    validate_source_crc(rom, patch)?;
-
     let mut target = Vec::with_capacity(target_size as usize);
     let mut source_relative_offset: i64 = 0;
     let mut target_relative_offset: i64 = 0;
     let commands_end = patch.len() - FOOTER_SIZE;
 
-    while offset < commands_end {
-        let (command, bytes_read) = varint::decode(&patch[offset..])
+    // Create context once outside loop to reduce allocations
+    let mut ctx = ActionContext {
+        rom,
+        patch,
+        target: &mut target,
+        source_relative_offset: &mut source_relative_offset,
+        target_relative_offset: &mut target_relative_offset,
+        offset: &mut offset,
+    };
+
+    while *ctx.offset < commands_end {
+        let (command, bytes_read) = varint::decode(&ctx.patch[*ctx.offset..])
             .map_err(|_| PatchError::InvalidFormat("Invalid command varint".to_string()))?;
-        offset += bytes_read;
+        *ctx.offset += bytes_read;
 
         let action = (command & 0x03) as u8;
         let length = ((command >> 2) + 1) as usize;
-
-        let mut ctx = ActionContext {
-            rom,
-            patch,
-            target: &mut target,
-            source_relative_offset: &mut source_relative_offset,
-            target_relative_offset: &mut target_relative_offset,
-            offset: &mut offset,
-        };
 
         match action {
             ACTION_SOURCE_READ => actions::source_read(&mut ctx, length)?,
@@ -67,7 +66,6 @@ pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
             actual: target.len(),
         });
     }
-    validate_target_crc(&target, patch)?;
 
     *rom = target;
     Ok(())
