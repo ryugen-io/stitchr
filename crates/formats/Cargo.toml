@@ -11,6 +11,7 @@ description = "Patch format implementations (IPS, BPS, UPS, APS, RUP, PPF, xdelt
 [dependencies]
 rom-patcher-core = { path = "../core" }
 thiserror.workspace = true
+crc32fast = "1.5"
 
 [dev-dependencies]
 criterion = "0.5"
