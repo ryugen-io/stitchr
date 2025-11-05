@@ -56,3 +56,21 @@ fn test_mother3_patch() {
         "Metadata should include target checksum"
     );
 }
+
+#[test]
+fn test_apply_and_verify() {
+    let patch = fs::read("../../test_files/ups/test.ups").expect("Failed to read UPS patch");
+    let mut rom = fs::read("../../test_files/ups/test.rom.gba").expect("Failed to read ROM");
+
+    let patcher = UpsPatcher;
+    assert!(
+        patcher.apply(&mut rom, &patch).is_ok(),
+        "Should successfully apply UPS patch"
+    );
+
+    // Verify the result matches target checksum
+    assert!(
+        UpsPatcher::verify(&[], &patch, Some(&rom)).is_ok(),
+        "Output ROM should match target checksum"
+    );
+}
