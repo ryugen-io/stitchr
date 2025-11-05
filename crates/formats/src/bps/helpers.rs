@@ -24,38 +24,30 @@ pub fn parse_header(patch: &[u8]) -> Result<(u64, u64, usize)> {
     Ok((source_size, target_size, offset))
 }
 
-/// Validate source ROM CRC32
-pub fn validate_source_crc(rom: &[u8], patch: &[u8]) -> Result<()> {
-    let source_crc_offset = patch.len() - FOOTER_SIZE;
+/// Generic CRC32 validation
+fn validate_crc32(data: &[u8], patch: &[u8], offset: usize) -> Result<()> {
     let expected = u32::from_le_bytes([
-        patch[source_crc_offset],
-        patch[source_crc_offset + 1],
-        patch[source_crc_offset + 2],
-        patch[source_crc_offset + 3],
+        patch[offset],
+        patch[offset + 1],
+        patch[offset + 2],
+        patch[offset + 3],
     ]);
 
-    let actual = crc32fast::hash(rom);
+    let actual = crc32fast::hash(data);
     if expected != actual {
         return Err(PatchError::ChecksumMismatch { expected, actual });
     }
     Ok(())
 }
 
+/// Validate source ROM CRC32
+pub fn validate_source_crc(rom: &[u8], patch: &[u8]) -> Result<()> {
+    validate_crc32(rom, patch, patch.len() - FOOTER_SIZE)
+}
+
 /// Validate target ROM CRC32
 pub fn validate_target_crc(target: &[u8], patch: &[u8]) -> Result<()> {
-    let target_crc_offset = patch.len() - 8;
-    let expected = u32::from_le_bytes([
-        patch[target_crc_offset],
-        patch[target_crc_offset + 1],
-        patch[target_crc_offset + 2],
-        patch[target_crc_offset + 3],
-    ]);
-
-    let actual = crc32fast::hash(target);
-    if expected != actual {
-        return Err(PatchError::ChecksumMismatch { expected, actual });
-    }
-    Ok(())
+    validate_crc32(target, patch, patch.len() - 8)
 }
 
 /// Decode signed varint delta
