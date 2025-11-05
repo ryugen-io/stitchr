@@ -5,7 +5,12 @@ use rom_patcher_core::{PatchFormat, PatchType};
 use rom_patcher_formats::{bps::BpsPatcher, ips::IpsPatcher};
 
 /// Dispatch verify() calls to appropriate format
-fn dispatch_verify(rom: &[u8], patch: &[u8], patch_type: &PatchType, target: Option<&[u8]>) -> Result<()> {
+fn dispatch_verify(
+    rom: &[u8],
+    patch: &[u8],
+    patch_type: &PatchType,
+    target: Option<&[u8]>,
+) -> Result<()> {
     match patch_type {
         PatchType::Ips => IpsPatcher::verify(rom, patch, target)?,
         PatchType::Bps => BpsPatcher::verify(rom, patch, target)?,
