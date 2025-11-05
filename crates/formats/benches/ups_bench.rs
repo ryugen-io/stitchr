@@ -16,7 +16,11 @@ fn generate_test_patch(rom_size: usize, xor_count: usize) -> Vec<u8> {
     write_vlv(&mut patch, rom_size as u64);
 
     // Generate XOR records
-    let stride = if xor_count > 0 { rom_size / xor_count } else { rom_size };
+    let stride = if xor_count > 0 {
+        rom_size / xor_count
+    } else {
+        rom_size
+    };
     for i in 0..xor_count {
         let relative_offset = if i == 0 { 0 } else { stride - 5 }; // -5 for XOR data length
         write_vlv(&mut patch, relative_offset as u64);
