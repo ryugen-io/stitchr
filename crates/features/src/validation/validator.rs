@@ -2,7 +2,7 @@
 
 use rom_patcher_core::{PatchError, Result};
 
-use super::algorithms::crc32::Crc32Hasher;
+use super::algorithms::md5;
 use super::trait_def::ValidationFeature;
 use super::types::HashAlgorithm;
 
@@ -17,9 +17,7 @@ impl Validator {
 
     /// Compute CRC32 checksum
     pub fn crc32(data: &[u8]) -> u32 {
-        let mut hasher = Crc32Hasher::new();
-        hasher.update(data);
-        hasher.finalize()
+        crc32fast::hash(data)
     }
 
     /// Compute checksum/hash based on algorithm
@@ -30,15 +28,15 @@ impl Validator {
                 crc.to_be_bytes().to_vec()
             }
             HashAlgorithm::Md5 => {
-                // TODO: Implement MD5 (requires external crate)
-                vec![]
+                let hash = md5::compute(data);
+                hash.as_bytes().to_vec()
             }
             HashAlgorithm::Sha1 => {
-                // TODO: Implement SHA-1 (requires external crate)
+                // Not implemented
                 vec![]
             }
             HashAlgorithm::Sha256 => {
-                // TODO: Implement SHA-256 (requires external crate)
+                // Not implemented
                 vec![]
             }
         }
