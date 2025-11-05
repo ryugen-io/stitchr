@@ -2,7 +2,7 @@
 
 use anyhow::Result;
 use rom_patcher_core::{PatchFormat, PatchType};
-use rom_patcher_formats::{bps::BpsPatcher, ips::IpsPatcher};
+use rom_patcher_formats::{bps::BpsPatcher, ips::IpsPatcher, ups::UpsPatcher};
 
 /// Dispatch verify() calls to appropriate format
 fn dispatch_verify(
@@ -14,6 +14,7 @@ fn dispatch_verify(
     match patch_type {
         PatchType::Ips => IpsPatcher::verify(rom, patch, target)?,
         PatchType::Bps => BpsPatcher::verify(rom, patch, target)?,
+        PatchType::Ups => UpsPatcher::verify(rom, patch, target)?,
         _ => anyhow::bail!("Format {} does not support verification", patch_type.name()),
     }
     Ok(())
@@ -24,6 +25,7 @@ fn dispatch_validate(patch: &[u8], patch_type: &PatchType) -> Result<()> {
     match patch_type {
         PatchType::Ips => IpsPatcher::validate(patch)?,
         PatchType::Bps => BpsPatcher::validate(patch)?,
+        PatchType::Ups => UpsPatcher::validate(patch)?,
         _ => anyhow::bail!("Format {} does not support verification", patch_type.name()),
     }
     Ok(())
