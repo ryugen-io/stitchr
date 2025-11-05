@@ -46,9 +46,14 @@ pub fn verify_source(rom: &[u8], patch: &[u8], patch_type: &PatchType) -> Result
 }
 
 /// Verify target ROM checksum against patch
-pub fn verify_target(rom: &[u8], patch: &[u8], patch_type: &PatchType) -> Result<()> {
+pub fn verify_target(
+    source_rom: &[u8],
+    target_rom: &[u8],
+    patch: &[u8],
+    patch_type: &PatchType,
+) -> Result<()> {
     println!("Verifying target ROM checksum...");
-    dispatch_verify(rom, patch, patch_type, Some(rom))?;
+    dispatch_verify(source_rom, patch, patch_type, Some(target_rom))?;
     println!("Target ROM checksum verified!");
     Ok(())
 }

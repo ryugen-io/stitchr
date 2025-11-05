@@ -63,7 +63,7 @@ pub fn execute(
 
     // Verify target checksum if requested
     if verify {
-        super::verify::verify_target(&patched_rom, &patch_data, &patch_type)
+        super::verify::verify_target(&original_rom, &patched_rom, &patch_data, &patch_type)
             .context("Target ROM checksum verification failed")?;
     }
 
