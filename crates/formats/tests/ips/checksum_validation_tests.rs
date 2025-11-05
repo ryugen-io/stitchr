@@ -4,7 +4,6 @@
 //! matches expected checksums from reference implementations.
 
 use rom_patcher_core::PatchFormat;
-use rom_patcher_features::validation::algorithms::crc32;
 use rom_patcher_formats::ips::IpsPatcher;
 use std::fs;
 use std::path::PathBuf;
@@ -27,7 +26,7 @@ fn test_sml2dx_patch_checksum() {
     let mut rom = fs::read(&rom_path).expect("Failed to read ROM");
 
     // Validate input ROM checksum
-    let input_crc = crc32::compute(&rom);
+    let input_crc = crc32fast::hash(&rom);
     println!(
         "Input ROM CRC32: {:08X} (expected: {:08X})",
         input_crc, EXPECTED_INPUT_CRC32
@@ -43,7 +42,7 @@ fn test_sml2dx_patch_checksum() {
     let patch = fs::read(&patch_path).expect("Failed to read patch");
 
     // Validate patch checksum
-    let patch_crc = crc32::compute(&patch);
+    let patch_crc = crc32fast::hash(&patch);
     println!(
         "Patch CRC32: {:08X} (expected: {:08X})",
         patch_crc, EXPECTED_PATCH_CRC32
@@ -61,7 +60,7 @@ fn test_sml2dx_patch_checksum() {
         .expect("Failed to apply patch");
 
     // Validate output checksum against RomPatcherJS reference
-    let output_crc = crc32::compute(&rom);
+    let output_crc = crc32fast::hash(&rom);
     println!(
         "Output ROM CRC32: {:08X} (expected: {:08X})",
         output_crc, EXPECTED_OUTPUT_CRC32
@@ -80,7 +79,7 @@ fn test_original_rom_unchanged() {
     // Verify we're using the correct original ROM
     let rom_path = test_rom_path("Super Mario Land 2 - 6 Golden Coins (UE) (V1.0) [!].gb");
     let rom = fs::read(&rom_path).expect("Failed to read ROM");
-    let rom_crc = crc32::compute(&rom);
+    let rom_crc = crc32fast::hash(&rom);
 
     // This is the known CRC32 of the original ROM
     // Update this value if using a different ROM version
@@ -95,7 +94,7 @@ fn test_patch_file_integrity() {
     // Verify patch file hasn't been corrupted
     let patch_path = test_rom_path("patch.ips");
     let patch = fs::read(&patch_path).expect("Failed to read patch");
-    let patch_crc = crc32::compute(&patch);
+    let patch_crc = crc32fast::hash(&patch);
 
     println!("Patch CRC32: {:08X}", patch_crc);
     println!("Patch size: {} bytes", patch.len());
