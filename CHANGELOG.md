@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.2.8-patch.4] - 2025-11-05
+
+### Changed
+- Modularized IPS apply tests into separate modules
+  - basic_tests.rs, rle_tests.rs, error_tests.rs
+  - Reduced ips/apply_tests.rs from 119 to 3 focused modules
+  - All 20 tests passing
+
 ## [0.2.8-patch.3] - 2025-11-05
 
 ### Changed
