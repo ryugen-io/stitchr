@@ -44,6 +44,26 @@ pub trait PatchFormat: Send + Sync {
     fn validate(patch: &[u8]) -> Result<()>
     where
         Self: Sized;
+
+    /// Verify checksums (source ROM and optionally target ROM)
+    ///
+    /// # Arguments
+    /// * `rom` - Source ROM data to verify
+    /// * `patch` - Patch data containing checksums
+    /// * `target` - Optional target ROM data to verify (after patching)
+    ///
+    /// # Errors
+    /// Returns an error if checksums don't match
+    ///
+    /// # Default Implementation
+    /// No-op for formats without checksum support (e.g., IPS)
+    fn verify(rom: &[u8], patch: &[u8], target: Option<&[u8]>) -> Result<()>
+    where
+        Self: Sized,
+    {
+        let _ = (rom, patch, target);
+        Ok(())
+    }
 }
 
 /// Helper trait for auto-detecting patch format from data
