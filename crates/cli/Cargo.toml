@@ -13,7 +13,7 @@ name = "rom_patcher_cli"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rompatch"
+name = "rompatchrs"
 path = "src/main.rs"
 
 [dependencies]
