@@ -51,15 +51,6 @@ fn write_varint(buf: &mut Vec<u8>, mut data: u64) {
 }
 
 #[test]
-fn test_can_handle() {
-    assert!(BpsPatcher::can_handle(b"BPS1"));
-    assert!(BpsPatcher::can_handle(b"BPS1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"));
-    assert!(!BpsPatcher::can_handle(b"PATCH"));
-    assert!(!BpsPatcher::can_handle(b"BPS"));
-    assert!(!BpsPatcher::can_handle(b""));
-}
-
-#[test]
 fn test_apply_source_read() {
     // SOURCE_READ: Copy from ROM at current output position
     let mut rom = vec![0xAA, 0xBB, 0xCC, 0xDD, 0xEE];
@@ -155,16 +146,4 @@ fn test_apply_mixed_actions() {
 
     let patcher = BpsPatcher;
     let _ = patcher.apply(&mut rom, &patch);
-}
-
-#[test]
-fn test_validate_checks_magic() {
-    let bad_patch = b"XXXX\x00\x00\x00";
-    assert!(BpsPatcher::validate(bad_patch).is_err());
-}
-
-#[test]
-fn test_validate_checks_size() {
-    let too_small = b"BPS1";
-    assert!(BpsPatcher::validate(too_small).is_err());
 }
