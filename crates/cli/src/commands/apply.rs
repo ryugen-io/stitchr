@@ -1,10 +1,9 @@
 //! Apply patch command with transactional safety
 
 use anyhow::{Context, Result};
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::{bps::BpsPatcher, detect_format, ips::IpsPatcher};
+use rom_patcher_formats::detect_format;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 /// Apply a patch to a ROM file with transactional safety
 ///
@@ -23,7 +22,7 @@ pub fn execute(
     // Generate default output path if not specified
     let output_path = match output_path {
         Some(path) => path,
-        None => generate_default_output(&rom_path)?,
+        None => crate::utils::paths::generate_default_output(&rom_path)?,
     };
 
     // Safety check: prevent overwriting input
@@ -79,7 +78,7 @@ pub fn execute(
     let mut patched_rom = original_rom.clone();
 
     // Apply patch with format-specific handler
-    apply_patch_by_type(&mut patched_rom, &patch_data, &patch_type)
+    super::dispatch::apply_patch(&mut patched_rom, &patch_data, &patch_type)
         .context("Failed to apply patch")?;
 
     // Verify target checksum if requested
@@ -115,56 +114,6 @@ pub fn execute(
     #[cfg(feature = "retroachievements")]
     {
         crate::utils::retroachievements::check_and_display(&patched_rom, &output_path);
-    }
-
-    Ok(())
-}
-
-/// Generate default output path: {rom_dir}/patched/{stem}.patched.{ext}
-fn generate_default_output(rom_path: &Path) -> Result<PathBuf> {
-    let rom_dir = rom_path
-        .parent()
-        .context("ROM file has no parent directory")?;
-
-    let patched_dir = rom_dir.join("patched");
-    fs::create_dir_all(&patched_dir).context("Failed to create patched/ directory")?;
-
-    let file_stem = rom_path
-        .file_stem()
-        .and_then(|s| s.to_str())
-        .context("ROM file has invalid filename")?;
-
-    let extension = rom_path.extension().and_then(|s| s.to_str()).unwrap_or("");
-
-    let output_filename = if extension.is_empty() {
-        format!("{}.patched", file_stem)
-    } else {
-        format!("{}.patched.{}", file_stem, extension)
-    };
-
-    Ok(patched_dir.join(output_filename))
-}
-
-/// Apply patch based on detected format
-fn apply_patch_by_type(
-    rom: &mut Vec<u8>,
-    patch: &[u8],
-    patch_type: &rom_patcher_core::PatchType,
-) -> Result<()> {
-    use rom_patcher_core::PatchType;
-
-    match patch_type {
-        PatchType::Ips => {
-            let patcher = IpsPatcher;
-            patcher.apply(rom, patch)?;
-        }
-        PatchType::Bps => {
-            let patcher = BpsPatcher;
-            patcher.apply(rom, patch)?;
-        }
-        _ => {
-            anyhow::bail!("Format {} is not yet implemented", patch_type.name());
-        }
     }
 
     Ok(())
