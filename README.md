@@ -2,7 +2,7 @@
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
-**Current Status:** v0.2.2 | 77 Tests | Binary: 2.0MB (with RA)
+**Current Status:** v0.2.3 | 77 Tests | Binary: 1.4MB (with RA)
 
 ## Supported Formats
 
@@ -144,15 +144,19 @@ Benchmarked on various ROM sizes:
 - **BPS apply (1MB):** 268 µs (30% faster with optional verification)
 - **BPS apply (16MB):** 4.8 ms
 - **BPS validate:** 42 ns (constant time - patch CRC32 only)
-- **Binary size:** 588KB (optimized with LTO + strip)
+- **UPS apply (1MB):** 17 µs
+- **UPS apply (16MB):** 306 µs
+- **UPS apply (32MB):** 10.3 ms
+- **UPS validate:** 64 ns (constant time - patch CRC32 only)
+- **Binary size:** 1.4MB (optimized with LTO + strip + minreq)
 - **Zero runtime dependencies** (static linking)
 
-Note: BPS checksums are optional via --verify flag. Without verification, BPS is fast. With --verify, all 3 CRC32 checks are performed (patch + source + target).
+Note: BPS/UPS checksums are optional via --verify flag. Without verification, patching is fast. With --verify, all CRC32 checks are performed (patch + source + target).
 
 ## Project Stats
 
-- **Version:** 0.2.2
+- **Version:** 0.2.3
 - **Test Coverage:** 77 tests (17 IPS + 17 BPS + 17 UPS + 7 RA + others)
 - **Code Quality:** All files under 200 lines
 - **Build Time:** ~5s (release with LTO)
-- **Binary Size:** 2.0MB (with RetroAchievements enabled by default)
+- **Binary Size:** 1.4MB (with RetroAchievements, optimized with minreq + manual JSON parser)
