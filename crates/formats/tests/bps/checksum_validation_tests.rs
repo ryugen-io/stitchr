@@ -19,7 +19,7 @@ fn test_samurai_kid_patch() {
     // This is a real-world BPS patch that exercises all action types
 
     // Load original ROM
-    let rom_path = test_rom_path("Samurai Kid (Japan).gbc");
+    let rom_path = test_rom_path("test.rom.gbc");
     let mut rom = match fs::read(&rom_path) {
         Ok(data) => data,
         Err(_) => {
@@ -93,7 +93,7 @@ fn test_patch_file_integrity() {
 #[test]
 fn test_rom_file_exists() {
     // Verify we're using the correct original ROM
-    let rom_path = test_rom_path("Samurai Kid (Japan).gbc");
+    let rom_path = test_rom_path("test.rom.gbc");
     let rom = match fs::read(&rom_path) {
         Ok(data) => data,
         Err(_) => {
