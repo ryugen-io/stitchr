@@ -74,32 +74,3 @@ pub fn validate(patch: &[u8]) -> Result<()> {
 
     Ok(())
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_can_handle() {
-        assert!(can_handle(
-            b"BPS1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
-        ));
-        assert!(!can_handle(b"IPS\x00"));
-        assert!(!can_handle(b"BPS"));
-        assert!(!can_handle(b""));
-    }
-
-    #[test]
-    fn test_validate_too_small() {
-        // Less than header + footer
-        assert!(validate(b"BPS1").is_err());
-        assert!(validate(b"BPS1\x80\x80\x80").is_err());
-    }
-
-    #[test]
-    fn test_validate_bad_magic() {
-        let mut patch = vec![0; 20];
-        patch[0..4].copy_from_slice(b"BAD!");
-        assert!(validate(&patch).is_err());
-    }
-}

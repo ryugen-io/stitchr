@@ -6,7 +6,8 @@ mod apply;
 mod helpers;
 mod metadata;
 mod validate;
-mod varint;
+
+pub mod varint;
 
 /// BPS format constants
 pub mod constants {

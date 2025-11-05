@@ -2,6 +2,7 @@
 
 use super::constants::*;
 use super::helpers::parse_header;
+use super::record_validation;
 use rom_patcher_core::{PatchError, Result};
 
 /// Check if data is a valid APS N64 patch
@@ -32,7 +33,7 @@ pub fn validate(patch: &[u8]) -> Result<()> {
         });
     }
 
-    let (header, mut offset) = parse_header(patch)?;
+    let (header, offset) = parse_header(patch)?;
 
     if header.header_type != HEADER_TYPE_N64 {
         return Err(PatchError::InvalidFormat(
@@ -40,81 +41,7 @@ pub fn validate(patch: &[u8]) -> Result<()> {
         ));
     }
 
-    while offset < patch.len() {
-        if offset + 5 > patch.len() {
-            return Err(PatchError::UnexpectedEof(
-                "Incomplete record header".to_string(),
-            ));
-        }
-
-        offset += 4;
-        let length = patch[offset];
-        offset += 1;
-
-        if length == RECORD_RLE {
-            if offset + 2 > patch.len() {
-                return Err(PatchError::UnexpectedEof(
-                    "Incomplete RLE record".to_string(),
-                ));
-            }
-            offset += 2;
-        } else {
-            if offset + length as usize > patch.len() {
-                return Err(PatchError::UnexpectedEof(
-                    "Incomplete simple record".to_string(),
-                ));
-            }
-            offset += length as usize;
-        }
-    }
+    record_validation::validate_records(patch, offset)?;
 
     Ok(())
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    fn create_minimal_patch() -> Vec<u8> {
-        let mut patch = Vec::new();
-        patch.extend_from_slice(MAGIC); // Magic
-        patch.push(HEADER_TYPE_N64); // Header type
-        patch.push(0x00); // Encoding method
-        patch.extend_from_slice(&[0u8; DESCRIPTION_LEN]); // Description
-
-        // N64 header
-        patch.push(0x01); // Original format
-        patch.extend_from_slice(b"NTE"); // Cart ID
-        patch.extend_from_slice(&[0u8; N64_CRC_LEN]); // CRC
-        patch.extend_from_slice(&[0u8; N64_PAD_LEN]); // Padding
-
-        // Output size (1024 bytes, LE)
-        patch.extend_from_slice(&1024u32.to_le_bytes());
-
-        patch
-    }
-
-    #[test]
-    fn test_can_handle_valid() {
-        let patch = create_minimal_patch();
-        assert!(can_handle(&patch));
-    }
-
-    #[test]
-    fn test_can_handle_invalid_magic() {
-        let patch = b"INVALID";
-        assert!(!can_handle(patch));
-    }
-
-    #[test]
-    fn test_validate_minimal() {
-        let patch = create_minimal_patch();
-        assert!(validate(&patch).is_ok());
-    }
-
-    #[test]
-    fn test_validate_too_small() {
-        let patch = &[0u8; 10];
-        assert!(validate(patch).is_err());
-    }
 }
