@@ -81,7 +81,9 @@ mod tests {
 
     #[test]
     fn test_can_handle() {
-        assert!(can_handle(b"BPS1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"));
+        assert!(can_handle(
+            b"BPS1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+        ));
         assert!(!can_handle(b"IPS\x00"));
         assert!(!can_handle(b"BPS"));
         assert!(!can_handle(b""));

@@ -1,7 +1,7 @@
 //! IPS record handlers (RLE and normal)
 
+use crate::ips::io::read_u16_be;
 use rom_patcher_core::{PatchError, Result};
-use crate::ips::io::{read_u16_be};
 
 /// Apply a single IPS record (normal or RLE)
 pub fn apply_record(

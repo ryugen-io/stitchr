@@ -30,9 +30,9 @@
 
 mod records;
 
-use rom_patcher_core::{PatchError, Result};
 use crate::ips::constants::{EOF_MARKER, HEADER};
 use crate::ips::io::read_u24_be;
+use rom_patcher_core::{PatchError, Result};
 
 /// Apply IPS patch to ROM data in-place.
 ///

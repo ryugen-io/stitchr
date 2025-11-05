@@ -77,9 +77,7 @@ pub fn target_copy(ctx: &mut ActionContext, length: usize) -> Result<()> {
     *ctx.target_relative_offset += decode_signed_delta(data);
 
     // Only check that START position is valid - target grows as we copy (RLE)
-    if *ctx.target_relative_offset < 0
-        || *ctx.target_relative_offset as usize >= ctx.target.len()
-    {
+    if *ctx.target_relative_offset < 0 || *ctx.target_relative_offset as usize >= ctx.target.len() {
         return Err(PatchError::InvalidFormat(
             "TargetCopy offset out of bounds".to_string(),
         ));

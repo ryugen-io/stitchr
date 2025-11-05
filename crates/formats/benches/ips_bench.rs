@@ -30,14 +30,16 @@ fn bench_ips_apply(c: &mut Criterion) {
 
     // Test from 1KB up to 16MB (IPS maximum due to 24-bit addressing)
     for size in [
-        1024,           // 1KB
-        10 * 1024,      // 10KB
-        100 * 1024,     // 100KB
-        1024 * 1024,    // 1MB
-        4 * 1024 * 1024,    // 4MB
-        8 * 1024 * 1024,    // 8MB
-        16 * 1024 * 1024,   // 16MB (IPS max)
-    ].iter() {
+        1024,             // 1KB
+        10 * 1024,        // 10KB
+        100 * 1024,       // 100KB
+        1024 * 1024,      // 1MB
+        4 * 1024 * 1024,  // 4MB
+        8 * 1024 * 1024,  // 8MB
+        16 * 1024 * 1024, // 16MB (IPS max)
+    ]
+    .iter()
+    {
         let patch = generate_test_patch(*size, 10);
         let original = vec![0u8; *size];
 
@@ -59,14 +61,16 @@ fn bench_ips_validate(c: &mut Criterion) {
 
     // Test from 1KB up to 16MB (IPS maximum due to 24-bit addressing)
     for size in [
-        1024,           // 1KB
-        10 * 1024,      // 10KB
-        100 * 1024,     // 100KB
-        1024 * 1024,    // 1MB
-        4 * 1024 * 1024,    // 4MB
-        8 * 1024 * 1024,    // 8MB
-        16 * 1024 * 1024,   // 16MB (IPS max)
-    ].iter() {
+        1024,             // 1KB
+        10 * 1024,        // 10KB
+        100 * 1024,       // 100KB
+        1024 * 1024,      // 1MB
+        4 * 1024 * 1024,  // 4MB
+        8 * 1024 * 1024,  // 8MB
+        16 * 1024 * 1024, // 16MB (IPS max)
+    ]
+    .iter()
+    {
         let patch = generate_test_patch(*size, 10);
 
         group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, _| {

@@ -56,7 +56,7 @@ pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
                 return Err(PatchError::InvalidFormat(format!(
                     "Unknown action type: {}",
                     action
-                )))
+                )));
             }
         }
     }

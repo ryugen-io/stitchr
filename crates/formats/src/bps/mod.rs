@@ -10,11 +10,11 @@
 
 use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
 
-mod helpers;
-mod varint;
-mod validate;
-mod metadata;
 mod apply;
+mod helpers;
+mod metadata;
+mod validate;
+mod varint;
 
 /// BPS format constants
 pub mod constants {

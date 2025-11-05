@@ -4,11 +4,7 @@ use rom_patcher_core::PatchFormat;
 use rom_patcher_formats::bps::BpsPatcher;
 
 /// Helper to create minimal valid BPS patch
-fn create_bps_patch(
-    source_size: usize,
-    target_size: usize,
-    actions: &[u8],
-) -> Vec<u8> {
+fn create_bps_patch(source_size: usize, target_size: usize, actions: &[u8]) -> Vec<u8> {
     let mut patch = Vec::new();
 
     // Magic header
