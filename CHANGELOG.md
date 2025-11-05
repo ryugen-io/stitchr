@@ -16,6 +16,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.1.9] - 2025-11-05
+
+### Added
+- Optional checksum verification via `--verify` flag
+  - Validates patch integrity (patch CRC32)
+  - Verifies source ROM checksum before patching
+  - Verifies target ROM checksum after patching
+  - Modular design: verify() method in PatchFormat trait with default no-op
+  - Separate CLI verify module for clean separation of concerns
+
+### Changed
+- BPS apply() no longer performs CRC32 validation by default (huge performance gain)
+  - Removed source ROM CRC32 check from apply()
+  - Removed target ROM CRC32 check from apply()
+  - Use `--verify` flag for full validation (all 3 CRC32 checks)
+- Performance improvements from optional verification:
+  - BPS @ 1MB: 268µs (was 382µs with CRC32) = **30% faster**
+  - Apply now only does patch logic, no checksums
+  - RomPatcherJS-compatible behavior (checksums optional)
+
+### Technical
+- Added verify() trait method to PatchFormat (default implementation = no-op)
+- BPS implements verify() for source/target CRC32 validation
+- Patch CRC32 validation remains in validate() (patch integrity check)
+- CLI verify module handles all 3 CRC32 checks when --verify flag used
+- Benchmark configuration improved (10s measurement time for large files)
+
+## [0.1.8-patch.5] - 2025-11-05
+
+### Changed
+- BPS performance optimizations
+  - Added #[inline] attributes to hot path functions (varint::decode, action handlers)
+  - Optimized TARGET_COPY RLE loop using extend_from_within for bulk copying
+  - Moved ActionContext outside main loop to reduce per-iteration allocations
+  - Performance: ~6.17ms @ 16MB (minimal change - CRC32 validation dominates)
+
 ## [0.1.8-patch.4] - 2025-11-05
 
 ### Changed
