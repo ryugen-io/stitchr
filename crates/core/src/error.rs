@@ -14,8 +14,8 @@ pub enum PatchError {
     #[error("Patch data is corrupted or incomplete")]
     CorruptedData,
 
-    #[error("Checksum verification failed")]
-    ChecksumMismatch,
+    #[error("Checksum verification failed: expected {expected:#x}, got {actual:#x}")]
+    ChecksumMismatch { expected: u32, actual: u32 },
 
     #[error("ROM size mismatch: expected {expected}, got {actual}")]
     SizeMismatch { expected: usize, actual: usize },
@@ -31,6 +31,9 @@ pub enum PatchError {
 
     #[error("Invalid magic bytes: expected {expected:?}, got {actual:?}")]
     InvalidMagic { expected: Vec<u8>, actual: Vec<u8> },
+
+    #[error("Unexpected end of file: {0}")]
+    UnexpectedEof(String),
 
     #[error("Generic error: {0}")]
     Other(String),
