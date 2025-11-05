@@ -2,14 +2,14 @@
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
-**Current Status:** v0.2.3 | 77 Tests | Binary: 1.4MB (with RA)
+**Current Status:** v0.2.4 | 94 Tests | Binary: 1.4MB (with RA)
 
 ## Supported Formats
 
 - **IPS** (International Patching System) - Production Ready (17 tests)
 - **BPS** (Beat Patching System) - Production Ready (17 tests)
-- **UPS** (Universal Patching System) - Production Ready (17 tests, v0.2.0)
-- **APS** (Nintendo 64 APS Format) - Planned
+- **UPS** (Universal Patching System) - Production Ready (17 tests)
+- **APS** (Nintendo 64 APS Format) - Production Ready (17 tests, v0.2.4)
 - **RUP** (Rupture Patches) - Planned
 - **PPF** (PlayStation Patch Format) - Planned
 - **xdelta** (Generic binary diff) - Planned
@@ -17,7 +17,7 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 ## Features
 
 ### Implemented
-- **Apply patches:** IPS, BPS, UPS formats with automatic detection
+- **Apply patches:** IPS, BPS, UPS, APS N64 formats with automatic detection
 - **Validation:** Optional CRC32 verification via --verify flag (patch integrity + source/target checksums)
 - **Hashing:** CRC32 and MD5 computation
 - **RetroAchievements:** Console detection + hash verification
@@ -25,7 +25,8 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 - **Safety:** Transactional patching with automatic rollback on error
 
 ### Planned
-- APS, RUP, PPF, xdelta format support
+- APS GBA format support
+- RUP, PPF, xdelta format support
 - SHA-1, SHA-256 checksums
 - Additional output options and verbosity controls
 
@@ -67,19 +68,22 @@ The binary will be at `target/release/rompatchrs`.
 
 ```bash
 # Basic usage (auto-generates output path)
-rompatchrs game.smc hack.ips
+rompatchrs game.gb patch.ips
 
 # Specify output path
-rompatchrs game.smc hack.ips game-patched.smc
+rompatchrs game.gb patch.ips game-patched.gb
 
 # With checksum verification (slower, safer - validates all CRC32 checksums)
-rompatchrs game.smc hack.bps game-patched.smc --verify
+rompatchrs game.gbc patch.bps game-patched.gbc --verify
 
 # UPS patches
-rompatchrs game.gba hack.ups game-patched.gba
+rompatchrs game.gba patch.ups game-patched.gba
+
+# APS N64 patches (.z64/.n64/.v64)
+rompatchrs game.z64 patch.aps game-patched.z64
 ```
 
-The patcher automatically detects the patch format (IPS, BPS, UPS) and applies it.
+The patcher automatically detects the patch format (IPS, BPS, UPS, APS) and applies it.
 
 ## Development
 
@@ -148,15 +152,18 @@ Benchmarked on various ROM sizes:
 - **UPS apply (16MB):** 306 µs
 - **UPS apply (32MB):** 10.3 ms
 - **UPS validate:** 64 ns (constant time - patch CRC32 only)
+- **APS apply (16MB):** TBD µs
+- **APS apply (32MB):** TBD µs
+- **APS validate:** TBD ns (constant time - header validation only)
 - **Binary size:** 1.4MB (optimized with LTO + strip + minreq)
 - **Zero runtime dependencies** (static linking)
 
-Note: BPS/UPS checksums are optional via --verify flag. Without verification, patching is fast. With --verify, all CRC32 checks are performed (patch + source + target).
+Note: BPS/UPS checksums are optional via --verify flag. Without verification, patching is fast. With --verify, all CRC32 checks are performed (patch + source + target). APS N64 includes optional ROM header verification (Cart ID, CRC).
 
 ## Project Stats
 
-- **Version:** 0.2.3
-- **Test Coverage:** 77 tests (17 IPS + 17 BPS + 17 UPS + 7 RA + others)
+- **Version:** 0.2.4
+- **Test Coverage:** 94 tests (17 IPS + 17 BPS + 17 UPS + 17 APS + 7 RA + others)
 - **Code Quality:** All files under 200 lines
 - **Build Time:** ~5s (release with LTO)
 - **Binary Size:** 1.4MB (with RetroAchievements, optimized with minreq + manual JSON parser)

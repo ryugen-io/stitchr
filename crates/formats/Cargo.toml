@@ -41,3 +41,8 @@ required-features = ["bps"]
 name = "ups_bench"
 harness = false
 required-features = ["ups"]
+
+[[bench]]
+name = "aps_bench"
+harness = false
+required-features = ["aps"]
