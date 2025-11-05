@@ -11,7 +11,7 @@ mod utils;
 
 /// ROM Patcher - Apply patches to ROM files
 #[derive(Parser, Debug)]
-#[command(name = "rompatch")]
+#[command(name = "rompatchrs")]
 #[command(author, version, about, long_about = None)]
 struct Cli {
     /// Path to the ROM file
