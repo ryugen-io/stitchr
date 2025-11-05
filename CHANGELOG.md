@@ -17,6 +17,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (create, info, validate)
 
+## [0.1.7] - 2025-11-05
+
+### Fixed
+- BPS SOURCE_READ action: Use current output position instead of source_relative_offset
+  - Matches RomPatcherJS behavior (tempFile.offset is output position)
+  - Fixes "SourceCopy offset out of bounds" error with real patches
+- BPS TARGET_COPY action: Only validate start position, not start+length
+  - Target buffer grows during RLE-style overlapping copies
+  - Fixes "TargetCopy offset out of bounds" error
+- BPS now works correctly with real ROM patches (tested with Samurai Kid translation)
+
+### Added
+- Expanded IPS benchmarks to test full 16MB range (IPS maximum)
+  - Test sizes: 1KB, 10KB, 100KB, 1MB, 4MB, 8MB, 16MB
+  - Performance: 59ns (1KB) to 304µs (16MB) with linear scaling
+- Wired up BPS format in CLI apply command
+  - BPS patches now functional via CLI
+
+### Changed
+- Fixed Hyprland package manager environment variables
+  - Changed from $PKGMGR_CACHE expansion to hardcoded /cache paths
+  - Fixes rustup/cargo detection issues
+
 ## [0.1.6] - 2025-11-05
 
 ### Added
