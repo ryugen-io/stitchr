@@ -1,5 +1,7 @@
 //! Utility functions
 
+pub mod paths;
+
 #[cfg(feature = "validation")]
 pub mod validation;
 
