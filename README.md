@@ -2,7 +2,7 @@
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
-**Current Status:** v0.2.8-patch.8 | 141 Tests | Binary: 1.4MB (with RA)
+**Current Status:** v0.2.9 | 141 Tests | Binary: 1.4MB (with RA)
 
 ## Supported Formats
 
@@ -142,7 +142,7 @@ MIT OR Apache-2.0
 
 ## Performance
 
-Benchmarked on various ROM sizes (v0.2.8-patch.8):
+Benchmarked on various ROM sizes (v0.2.9):
 
 ### Apply Performance
 
@@ -176,7 +176,7 @@ Note: BPS/UPS checksums are optional via --verify flag. Without verification, pa
 
 ## Project Stats
 
-- **Version:** 0.2.8-patch.8
+- **Version:** 0.2.9
 - **Test Coverage:** 141 tests (20 IPS + 28 BPS + 26 UPS + 24 APS N64 + 24 APS GBA + 7 RA + 12 others)
 - **Code Quality:** All files under 100 lines (modular structure)
 - **Build Time:** ~4s (release with LTO)
