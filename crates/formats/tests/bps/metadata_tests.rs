@@ -16,42 +16,17 @@ fn write_varint(buf: &mut Vec<u8>, mut data: u64) {
     }
 }
 
-fn create_bps_patch_with_metadata(
-    source_size: usize,
-    target_size: usize,
-    metadata: &str,
-) -> Vec<u8> {
-    let mut patch = Vec::new();
-
-    // Magic header
-    patch.extend_from_slice(b"BPS1");
-
-    // Source size (varint)
-    write_varint(&mut patch, source_size as u64);
-
-    // Target size (varint)
-    write_varint(&mut patch, target_size as u64);
-
-    // Metadata
-    write_varint(&mut patch, metadata.len() as u64);
-    patch.extend_from_slice(metadata.as_bytes());
-
-    // No actions
-
-    // Checksums
-    patch.extend_from_slice(&[0x00, 0x00, 0x00, 0x00]); // source CRC32
-    patch.extend_from_slice(&[0x00, 0x00, 0x00, 0x00]); // target CRC32
-
-    // Patch CRC32
-    let patch_crc = crc32fast::hash(&patch);
-    patch.extend_from_slice(&patch_crc.to_le_bytes());
-
-    patch
-}
-
 #[test]
 fn test_metadata_simple() {
-    let patch = create_bps_patch_with_metadata(1024, 2048, "");
+    let mut patch = Vec::new();
+    patch.extend_from_slice(b"BPS1");
+    write_varint(&mut patch, 1024); // source_size
+    write_varint(&mut patch, 2048); // target_size
+    write_varint(&mut patch, 0); // metadata_size
+    patch.extend_from_slice(&[0x00, 0x00, 0x00, 0x00]); // source CRC32
+    patch.extend_from_slice(&[0x00, 0x00, 0x00, 0x00]); // target CRC32
+    let patch_crc = crc32fast::hash(&patch);
+    patch.extend_from_slice(&patch_crc.to_le_bytes());
 
     let metadata = BpsPatcher::metadata(&patch).unwrap();
 
@@ -61,7 +36,17 @@ fn test_metadata_simple() {
 
 #[test]
 fn test_metadata_with_info() {
-    let patch = create_bps_patch_with_metadata(512, 1024, "Test patch v1.0");
+    let mut patch = Vec::new();
+    patch.extend_from_slice(b"BPS1");
+    write_varint(&mut patch, 512); // source_size
+    write_varint(&mut patch, 1024); // target_size
+    let metadata_str = b"Test patch v1.0";
+    write_varint(&mut patch, metadata_str.len() as u64); // metadata_size
+    patch.extend_from_slice(metadata_str);
+    patch.extend_from_slice(&[0x00, 0x00, 0x00, 0x00]); // source CRC32
+    patch.extend_from_slice(&[0x00, 0x00, 0x00, 0x00]); // target CRC32
+    let patch_crc = crc32fast::hash(&patch);
+    patch.extend_from_slice(&patch_crc.to_le_bytes());
 
     let metadata = BpsPatcher::metadata(&patch).unwrap();
 

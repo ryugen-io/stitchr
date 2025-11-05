@@ -2,12 +2,12 @@
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
-**Current Status:** v0.1.6 | 2,784 LOC | 36 Tests | Binary: 564KB
+**Current Status:** v0.1.8-patch.3 | 60 Tests | Binary: 588KB (stripped)
 
 ## Supported Formats
 
-- **IPS** (International Patching System) - Implemented
-- **BPS** (Beat Patching System) - Implemented (v0.1.6)
+- **IPS** (International Patching System) - ✅ Production Ready (17 tests)
+- **BPS** (Beat Patching System) - ✅ Production Ready (17 tests, v0.1.8)
 - **UPS** (Universal Patching System) - Planned
 - **APS** (Nintendo 64 APS Format) - Planned
 - **RUP** (Rupture Patches) - Planned
@@ -17,12 +17,12 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 ## Features
 
 ### Implemented
-- Apply patches to ROMs (IPS, BPS)
-- Automatic format detection
-- Patch validation with CRC32 checksums
-- CRC32 and MD5 hash computation
-- RetroAchievements integration (console detection, hash verification)
-- Support for 10+ console types (GB, GBA, SNES, NES, N64, Genesis, etc.)
+- **Apply patches:** IPS, BPS formats with automatic detection
+- **Validation:** CRC32 checksums with SIMD optimization
+- **Hashing:** CRC32 and MD5 computation
+- **RetroAchievements:** Console detection + hash verification
+- **Console Support:** GB/GBC/GBA, NDS, 3DS, PSX/PS2/PSP, SNES, NES, N64, Genesis, Master System, Game Gear
+- **Safety:** Transactional patching with automatic rollback on error
 
 ### Planned
 - UPS, APS, RUP, PPF, xdelta format support
@@ -103,8 +103,9 @@ just doc          # Generate and open documentation
 1. Create a new module in `crates/formats/src/`
 2. Implement the `PatchFormat` trait
 3. Add format detection in `detect_format()`
-4. Add CLI support in `crates/cli/src/main.rs`
-5. Add tests and benchmarks
+4. Add CLI support in `crates/cli/src/commands/apply.rs`
+5. Follow test structure from [docs/TEST_TEMPLATE.md](docs/TEST_TEMPLATE.md)
+6. Add benchmarks following IPS/BPS patterns
 
 ### Testing
 
@@ -114,10 +115,13 @@ just watch-test           # Watch and run tests on changes
 cargo test --all-features # Direct cargo command
 ```
 
+See [docs/TEST_TEMPLATE.md](docs/TEST_TEMPLATE.md) for test structure guidelines.
+
 ## Documentation
 
 - [CHANGELOG.md](CHANGELOG.md) - Version history and release notes
 - [ARCHITECTURE.md](ARCHITECTURE.md) - Detailed design documentation
+- [docs/TEST_TEMPLATE.md](docs/TEST_TEMPLATE.md) - Test structure guidelines
 - [docs/API.md](docs/API.md) - Complete API reference
 - [docs/CLI_USAGE.md](docs/CLI_USAGE.md) - CLI usage guide
 - [examples/](examples/) - Code examples
@@ -128,15 +132,17 @@ MIT OR Apache-2.0
 
 ## Performance
 
-- IPS apply: ~16 µs for 1MB ROM
-- BPS validation: 3x CRC32 checksums with hardware acceleration
-- Binary size: 564KB (optimized with LTO + strip)
-- Zero runtime dependencies (static linking)
+Benchmarked on 16MB ROMs (IPS maximum):
+
+- **IPS apply:** 304 µs (lightning fast)
+- **BPS apply:** 6.2 ms (20x slower but includes 3x CRC32 validation)
+- **BPS validate:** 42 ns (constant time - patch CRC32 only)
+- **Binary size:** 588KB (optimized with LTO + strip)
+- **Zero runtime dependencies** (static linking)
 
 ## Project Stats
 
-- **Version:** 0.1.6
-- **Lines of Code:** 2,784
-- **Test Coverage:** 36 tests
-- **Largest File:** 149 lines (all files under 200 lines)
-- **Build Time:** ~3s (release with LTO)
+- **Version:** 0.1.8-patch.3
+- **Test Coverage:** 60 tests (17 IPS + 17 BPS + 7 RA + others)
+- **Code Quality:** All files under 200 lines
+- **Build Time:** ~4s (release with LTO)

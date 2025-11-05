@@ -17,6 +17,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (create, info, validate)
 
+## [0.1.8-patch.4] - 2025-11-05
+
+### Changed
+- Refactored BPS tests to match IPS inline construction pattern
+  - Removed helper functions from apply_tests.rs
+  - Patches built inline for clarity (like IPS tests)
+  - Added mod.rs to BPS test structure
+  - Reduced apply_tests.rs from 174 to 138 lines
+
+### Added
+- docs/TEST_TEMPLATE.md - Standard test structure template
+- Updated README.md with current stats and TEST_TEMPLATE reference
+
 ## [0.1.8-patch.3] - 2025-11-05
 
 ### Added
