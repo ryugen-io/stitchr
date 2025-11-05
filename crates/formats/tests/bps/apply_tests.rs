@@ -143,3 +143,32 @@ fn test_apply_mixed_actions() {
     let patcher = BpsPatcher;
     let _ = patcher.apply(&mut rom, &patch);
 }
+
+#[test]
+fn test_apply_empty_patch() {
+    // Patch that copies source to target unchanged using SOURCE_READ
+    let mut rom = vec![0x12, 0x34, 0x56];
+    let original = rom.clone();
+
+    let mut patch = Vec::new();
+    patch.extend_from_slice(b"BPS1");
+    write_varint(&mut patch, 3); // source_size = 3
+    write_varint(&mut patch, 3); // target_size = 3
+    write_varint(&mut patch, 0); // metadata_size = 0
+    // SOURCE_READ length=3: ((3-1)<<2) | 0 = 8
+    write_varint(&mut patch, 8);
+
+    // Compute correct checksums
+    let source_crc = crc32fast::hash(&rom);
+    patch.extend_from_slice(&source_crc.to_le_bytes());
+    let target_crc = crc32fast::hash(&rom); // Same as source
+    patch.extend_from_slice(&target_crc.to_le_bytes());
+    let patch_crc = crc32fast::hash(&patch);
+    patch.extend_from_slice(&patch_crc.to_le_bytes());
+
+    let patcher = BpsPatcher;
+    patcher.apply(&mut rom, &patch).unwrap();
+
+    // ROM should be unchanged
+    assert_eq!(rom, original);
+}
