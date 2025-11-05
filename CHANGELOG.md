@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Planned
 - APS format implementation for N64 and GBA
+
+## [0.2.1] - 2025-11-05
+
+### Changed
+- UPS refactored to modular structure (apply/, metadata.rs, validate.rs)
+  - Matches IPS/BPS architecture exactly
+  - All files under 200 lines
+  - Improved maintainability
+- Added FORMAT_TEMPLATE directory with standard structure for new formats
+  - Complete implementation guide
+  - Template files for all modules
+  - Ensures consistency across all format implementations
+
+### Added
+- UPS benchmark configuration in Cargo.toml
+- UPS checksum_validation_tests.rs (20 total tests, parity with IPS/BPS)
 - RUP (Rupture) format implementation
 - PPF (PlayStation Patch Format) implementation
 - xdelta format implementation
