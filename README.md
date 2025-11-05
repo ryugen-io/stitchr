@@ -2,13 +2,13 @@
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
-**Current Status:** v0.1.9 | 60 Tests | Binary: 588KB (stripped)
+**Current Status:** v0.2.0 | 77 Tests | Binary: 588KB (stripped)
 
 ## Supported Formats
 
 - **IPS** (International Patching System) - Production Ready (17 tests)
-- **BPS** (Beat Patching System) - Production Ready (17 tests, v0.1.9)
-- **UPS** (Universal Patching System) - Planned
+- **BPS** (Beat Patching System) - Production Ready (17 tests)
+- **UPS** (Universal Patching System) - Production Ready (17 tests, v0.2.0)
 - **APS** (Nintendo 64 APS Format) - Planned
 - **RUP** (Rupture Patches) - Planned
 - **PPF** (PlayStation Patch Format) - Planned
@@ -17,7 +17,7 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 ## Features
 
 ### Implemented
-- **Apply patches:** IPS, BPS formats with automatic detection
+- **Apply patches:** IPS, BPS, UPS formats with automatic detection
 - **Validation:** Optional CRC32 verification via --verify flag (patch integrity + source/target checksums)
 - **Hashing:** CRC32 and MD5 computation
 - **RetroAchievements:** Console detection + hash verification
@@ -25,7 +25,7 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 - **Safety:** Transactional patching with automatic rollback on error
 
 ### Planned
-- UPS, APS, RUP, PPF, xdelta format support
+- APS, RUP, PPF, xdelta format support
 - SHA-1, SHA-256 checksums
 - Additional output options and verbosity controls
 
@@ -74,9 +74,12 @@ rompatchrs game.smc hack.ips game-patched.smc
 
 # With checksum verification (slower, safer - validates all CRC32 checksums)
 rompatchrs game.smc hack.bps game-patched.smc --verify
+
+# UPS patches
+rompatchrs game.gba hack.ups game-patched.gba
 ```
 
-The patcher automatically detects the patch format (IPS, BPS) and applies it.
+The patcher automatically detects the patch format (IPS, BPS, UPS) and applies it.
 
 ## Development
 
@@ -148,7 +151,7 @@ Note: BPS checksums are optional via --verify flag. Without verification, BPS is
 
 ## Project Stats
 
-- **Version:** 0.1.9
-- **Test Coverage:** 60 tests (17 IPS + 17 BPS + 7 RA + others)
+- **Version:** 0.2.0
+- **Test Coverage:** 77 tests (17 IPS + 17 BPS + 17 UPS + 7 RA + others)
 - **Code Quality:** All files under 200 lines
 - **Build Time:** ~4s (release with LTO)
