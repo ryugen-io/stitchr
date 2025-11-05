@@ -5,7 +5,8 @@ mod constants;
 mod helpers;
 mod metadata;
 mod validate;
-mod varint;
+
+pub mod varint;
 
 use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
 
