@@ -2,12 +2,12 @@
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
-**Current Status:** v0.1.8-patch.3 | 60 Tests | Binary: 588KB (stripped)
+**Current Status:** v0.1.9 | 60 Tests | Binary: 588KB (stripped)
 
 ## Supported Formats
 
-- **IPS** (International Patching System) - ✅ Production Ready (17 tests)
-- **BPS** (Beat Patching System) - ✅ Production Ready (17 tests, v0.1.8)
+- **IPS** (International Patching System) - Production Ready (17 tests)
+- **BPS** (Beat Patching System) - Production Ready (17 tests, v0.1.9)
 - **UPS** (Universal Patching System) - Planned
 - **APS** (Nintendo 64 APS Format) - Planned
 - **RUP** (Rupture Patches) - Planned
@@ -18,7 +18,7 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
 ### Implemented
 - **Apply patches:** IPS, BPS formats with automatic detection
-- **Validation:** CRC32 checksums with SIMD optimization
+- **Validation:** Optional CRC32 verification via --verify flag (patch integrity + source/target checksums)
 - **Hashing:** CRC32 and MD5 computation
 - **RetroAchievements:** Console detection + hash verification
 - **Console Support:** GB/GBC/GBA, NDS, 3DS, PSX/PS2/PSP, SNES, NES, N64, Genesis, Master System, Game Gear
@@ -71,6 +71,9 @@ rompatchrs game.smc hack.ips
 
 # Specify output path
 rompatchrs game.smc hack.ips game-patched.smc
+
+# With checksum verification (slower, safer - validates all CRC32 checksums)
+rompatchrs game.smc hack.bps game-patched.smc --verify
 ```
 
 The patcher automatically detects the patch format (IPS, BPS) and applies it.
@@ -132,17 +135,20 @@ MIT OR Apache-2.0
 
 ## Performance
 
-Benchmarked on 16MB ROMs (IPS maximum):
+Benchmarked on various ROM sizes:
 
-- **IPS apply:** 304 µs (lightning fast)
-- **BPS apply:** 6.2 ms (20x slower but includes 3x CRC32 validation)
+- **IPS apply (16MB):** 304 µs
+- **BPS apply (1MB):** 268 µs (30% faster with optional verification)
+- **BPS apply (16MB):** 4.8 ms
 - **BPS validate:** 42 ns (constant time - patch CRC32 only)
 - **Binary size:** 588KB (optimized with LTO + strip)
 - **Zero runtime dependencies** (static linking)
 
+Note: BPS checksums are optional via --verify flag. Without verification, BPS is fast. With --verify, all 3 CRC32 checks are performed (patch + source + target).
+
 ## Project Stats
 
-- **Version:** 0.1.8-patch.3
+- **Version:** 0.1.9
 - **Test Coverage:** 60 tests (17 IPS + 17 BPS + 7 RA + others)
 - **Code Quality:** All files under 200 lines
 - **Build Time:** ~4s (release with LTO)
