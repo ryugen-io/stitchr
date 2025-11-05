@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.2.8-patch.6] - 2025-11-05
+
+### Changed
+- Modularized BPS checksum validation tests into separate modules
+  - Split checksum_validation_tests.rs (110 lines) into 3 modules: helpers.rs, integration_tests.rs, file_integrity_tests.rs
+  - All 28 tests passing
+
 ## [0.2.8-patch.5] - 2025-11-05
 
 ### Changed
