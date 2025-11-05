@@ -31,3 +31,8 @@ xdelta = []
 name = "ips_bench"
 harness = false
 required-features = ["ips"]
+
+[[bench]]
+name = "bps_bench"
+harness = false
+required-features = ["bps"]
