@@ -39,3 +39,10 @@ fn test_validate_truncated() {
     let patch = b"PATCH\x00\x00";
     assert!(IpsPatcher::validate(patch).is_err());
 }
+
+#[test]
+fn test_validate_incomplete_record() {
+    // Missing data bytes
+    let patch = b"PATCH\x00\x00\x05\x00\x03EOF";
+    assert!(IpsPatcher::validate(patch).is_err());
+}
