@@ -1,19 +1,4 @@
-//! IPS (International Patching System) format implementation
-//!
-//! IPS is one of the oldest and most widely used patch formats.
-//!
-//! ## Format Specification
-//!
-//! - **Header**: "PATCH" (5 bytes)
-//! - **Records**: `[offset (3 bytes BE)][size (2 bytes BE)][data (size bytes)]`
-//!   - RLE encoding: size = 0, followed by `[rle_size (2 bytes BE)][value (1 byte)]`
-//! - **Footer**: "EOF" (3 bytes)
-//!
-//! ## Limitations
-//!
-//! - Maximum ROM size: 16 MB (24-bit addressing)
-//! - No checksums or validation
-//! - No metadata storage
+//! IPS (International Patching System) format support
 
 use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
 

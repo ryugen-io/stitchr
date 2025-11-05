@@ -1,12 +1,4 @@
-//! BPS (Beat Patching System) format implementation
-//!
-//! BPS is a modern patching format created by byuu/Near that improves upon IPS:
-//! - Supports files of any size (not limited to 16MB)
-//! - CRC32 checksums for source, target, and patch validation
-//! - Variable-length integer encoding for efficiency
-//! - Four action types: SourceRead, TargetRead, SourceCopy, TargetCopy
-//!
-//! Format specification: Public domain by byuu
+//! BPS (Beat Patching System) format support
 
 use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
 
