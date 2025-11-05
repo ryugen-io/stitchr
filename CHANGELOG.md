@@ -17,6 +17,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (create, info, validate)
 
+## [0.1.8] - 2025-11-05
+
+### Added
+- BPS comprehensive test suite (hardening)
+  - 11 integration tests including apply, action types, validation
+  - Real ROM integration test with Samurai Kid translation patch
+  - Test coverage reaches parity with IPS (both have 20+ tests)
+- BPS benchmark suite (apply, validate, metadata extraction)
+  - Tests performance across 1KB to 1MB ROM sizes
+  - Establishes baseline for future optimizations
+- Total test count: 54 tests (was 36 before hardening)
+
+### Technical
+- BPS now production-ready with comprehensive test coverage
+- All 54 tests passing across workspace
+
 ## [0.1.7] - 2025-11-05
 
 ### Fixed
