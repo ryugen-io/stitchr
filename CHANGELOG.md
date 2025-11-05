@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.2.8-patch.1] - 2025-11-05
+
+### Changed
+- Modularized CLI apply command into separate modules (input.rs, output.rs)
+  - Reduced cli/commands/apply.rs from 120 to 75 lines
+  - Improved code organization and maintainability
+
 ## [0.2.7] - 2025-11-05
 
 ### Fixed
