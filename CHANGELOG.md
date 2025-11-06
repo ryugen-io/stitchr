@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.3.1-patch.1] - 2025-11-06
+
+### Fixed
+- EBP format detection now correctly distinguishes from plain IPS
+  - can_handle() checks for JSON metadata presence
+  - EBP checked before IPS in detect_format()
+  - Plain IPS patches no longer misidentified as EBP
+
 ## [0.3.1] - 2025-11-06
 
 ### Changed
