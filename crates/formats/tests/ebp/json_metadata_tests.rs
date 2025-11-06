@@ -21,7 +21,8 @@ fn test_json_author() {
 
 #[test]
 fn test_json_full() {
-    let patch = b"PATCHEOF{\"title\":\"T\",\"author\":\"A\",\"description\":\"D\",\"version\":\"1\"}";
+    let patch =
+        b"PATCHEOF{\"title\":\"T\",\"author\":\"A\",\"description\":\"D\",\"version\":\"1\"}";
     let metadata = EbpPatcher::metadata(patch).unwrap();
     assert_eq!(metadata.extra.len(), 4);
 }
