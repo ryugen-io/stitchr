@@ -13,6 +13,13 @@ pub fn validate(patch: &[u8]) -> Result<()> {
 }
 
 /// Check if patch can be handled
+/// EBP = IPS (PATCH magic) + JSON metadata after EOF
 pub fn can_handle(patch: &[u8]) -> bool {
-    patch.len() >= MAGIC_SIZE && &patch[..MAGIC_SIZE] == MAGIC
+    if patch.len() < MAGIC_SIZE || &patch[..MAGIC_SIZE] != MAGIC {
+        return false;
+    }
+
+    // Check if JSON metadata is present (distinguishes EBP from plain IPS)
+    use super::helpers;
+    helpers::find_json_start(patch).is_some()
 }
