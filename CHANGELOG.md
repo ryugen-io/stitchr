@@ -11,6 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.3.1] - 2025-11-06
+
+### Changed
+- Improved EBP implementation to fully delegate to IPS
+  - Validation: EbpPatcher now uses IpsPatcher::validate()
+  - Metadata: EbpPatcher uses IpsPatcher::metadata() + adds JSON fields
+  - Ensures complete IPS compatibility for EBP format
+
+### Added
+- Full IPS test suite adapted for EBP (26 tests total, was 16)
+  - All validation tests (6 tests)
+  - All metadata tests (3 tests)
+  - All apply tests: basic, RLE, error handling (8 tests)
+  - All checksum validation tests (3 tests)
+  - EBP-specific JSON metadata tests (6 tests)
+
 ## [0.3.0] - 2025-11-06
 
 ### Added
