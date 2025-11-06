@@ -5,8 +5,15 @@ use rom_patcher_formats::ebp::EbpPatcher;
 
 #[test]
 fn test_can_handle() {
-    assert!(EbpPatcher::can_handle(b"PATCH"));
-    assert!(EbpPatcher::can_handle(b"PATCH\x00\x00\x00EOF"));
+    // EBP requires JSON metadata after EOF
+    assert!(EbpPatcher::can_handle(b"PATCHEOF{}"));
+    assert!(EbpPatcher::can_handle(b"PATCH\x00\x00\x00EOF{\"title\":\"test\"}"));
+
+    // Plain IPS (no JSON) should not be handled by EBP
+    assert!(!EbpPatcher::can_handle(b"PATCH"));
+    assert!(!EbpPatcher::can_handle(b"PATCHEOF"));
+
+    // Invalid formats
     assert!(!EbpPatcher::can_handle(b"NOTIPS"));
     assert!(!EbpPatcher::can_handle(b"PAT"));
 }
