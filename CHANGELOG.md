@@ -8,11 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- RUP (Rupture) format implementation
-- PPF (PlayStation Patch Format) implementation
-- xdelta format implementation
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
+
+## [0.3.0] - 2025-11-06
+
+### Added
+- EBP (Extended Binary Patch) format support
+  - IPS-compatible format with optional JSON metadata
+  - Manual JSON parsing (no serde dependency)
+  - Metadata extraction: title, author, description, version
+  - Full modular structure: constants, helpers, metadata, validate, apply
+  - Delegates patching to IPS implementation (DRY principle)
+  - Added to default features in formats crate
+  - Format detection in lib.rs
 
 ## [0.2.9-patch.1] - 2025-11-05
 
