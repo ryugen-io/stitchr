@@ -11,6 +11,8 @@ pub enum PatchType {
     Ups,
     /// Nintendo 64 APS format
     Aps,
+    /// EBP format
+    Ebp,
     /// Rupture patches
     Rup,
     /// PlayStation Patch Format
@@ -27,6 +29,7 @@ impl PatchType {
             Self::Bps => "bps",
             Self::Ups => "ups",
             Self::Aps => "aps",
+            Self::Ebp => "ebp",
             Self::Rup => "rup",
             Self::Ppf => "ppf",
             Self::Xdelta => "xdelta",
@@ -40,6 +43,7 @@ impl PatchType {
             Self::Bps => "Beat Patching System",
             Self::Ups => "Universal Patching System",
             Self::Aps => "Nintendo 64 APS Format",
+            Self::Ebp => "Extended Binary Patch",
             Self::Rup => "Rupture Patches",
             Self::Ppf => "PlayStation Patch Format",
             Self::Xdelta => "xdelta Binary Diff",
