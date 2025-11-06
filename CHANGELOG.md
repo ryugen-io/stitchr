@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.3.1-patch.2] - 2025-11-06
+
+### Added
+- EBP format benchmarks
+  - bench_ebp_apply: 7 benchmarks (1KB to 16MB)
+  - bench_ebp_validate: 7 benchmarks (1KB to 16MB)
+  - bench_ebp_metadata: 7 benchmarks (1KB to 16MB, includes JSON parsing)
+
 ## [0.3.1-patch.1] - 2025-11-06
 
 ### Fixed
