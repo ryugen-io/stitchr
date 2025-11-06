@@ -10,6 +10,10 @@ default:
 build:
     cargo build --release --all-features
 
+# Build release with auditable info (for security auditing)
+build-auditable:
+    cargo auditable build --release
+
 # Run all tests
 test:
     cargo test --all-features
@@ -54,9 +58,17 @@ update:
 outdated:
     cargo outdated
 
-# Run cargo audit for security vulnerabilities
-audit:
-    cargo audit
+# Run cargo-deny checks (licenses, advisories, bans, sources)
+deny:
+    cargo deny check
+
+# Check only security advisories
+deny-advisories:
+    cargo deny check advisories
+
+# Check only licenses
+deny-licenses:
+    cargo deny check licenses
 
 # Generate documentation
 doc:
@@ -73,3 +85,19 @@ watch-test:
 # Watch for changes and run checks
 watch-check:
     cargo watch -x "check --all-features"
+
+# Audit unsafe code usage (run from crates/cli)
+geiger:
+    cd crates/cli && cargo geiger
+
+# Analyze binary size (top 25 functions)
+bloat:
+    cargo bloat --release -n 25
+
+# Check for API breaking changes (requires baseline commit hash)
+semver-check BASELINE:
+    cargo semver-checks --baseline-rev {{BASELINE}}
+
+# Generate flamegraph for performance profiling
+flamegraph ROM PATCH:
+    cargo flamegraph --bin rompatchrs -- {{ROM}} {{PATCH}}
