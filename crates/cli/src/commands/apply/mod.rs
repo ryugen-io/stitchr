@@ -20,15 +20,21 @@ pub fn execute(
     patch_path: PathBuf,
     output_path: Option<PathBuf>,
     verify: bool,
+    only_mode: Option<rom_patcher_cli::OnlyMode>,
 ) -> Result<()> {
-    // Generate default output path if not specified
-    let output_path = match output_path {
-        Some(path) => path,
-        None => crate::utils::paths::generate_default_output(&rom_path)?,
+    // Generate default output path if not specified (not needed for verify-only mode)
+    let output_path = if only_mode.is_none() {
+        match output_path {
+            Some(path) => path,
+            None => crate::utils::paths::generate_default_output(&rom_path)?,
+        }
+    } else {
+        // Dummy path for verify-only mode (won't be used)
+        rom_path.with_extension("dummy")
     };
 
-    // Safety check: prevent overwriting input
-    if rom_path == output_path {
+    // Safety check: prevent overwriting input (skip in verify-only mode)
+    if only_mode.is_none() && rom_path == output_path {
         anyhow::bail!(
             "Input and output paths cannot be the same. Use a different output path to preserve the original ROM."
         );
@@ -47,6 +53,33 @@ pub fn execute(
         patch_type.name(),
         patch_type.extension()
     );
+
+    // Handle --only mode
+    if let Some(mode) = only_mode {
+        match mode {
+            rom_patcher_cli::OnlyMode::Verify => {
+                // Only verify, don't apply patch
+                println!("Running in verify-only mode (no patching will be performed)");
+
+                // IPS format has no embedded checksums - skip verification
+                if patch_type.name() == "International Patching System" {
+                    println!(
+                        "Note: IPS format does not support checksum verification (no embedded checksums)"
+                    );
+                    return Ok(());
+                }
+
+                // Verify source checksum
+                super::verify::verify_source(&original_rom, &patch_data, &patch_type)
+                    .context("Source ROM checksum verification failed")?;
+
+                println!("Verification completed successfully!");
+                return Ok(());
+            }
+        }
+    }
+
+    // Normal mode: apply patch with optional verification
 
     // Verify source checksum if requested
     if verify {
