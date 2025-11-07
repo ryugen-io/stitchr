@@ -1,8 +1,15 @@
 # ROM Patcher RS
 
-A modern, modular ROM patcher written in Rust supporting multiple patch formats.
+# rom-patcher-rs
 
-**Current Status:** v0.4.0 | 210 Tests | Binary: 1.5MB (with RA)
+![Version](https://img.shields.io/badge/version-0.4.3-blue)
+![Tests](https://img.shields.io/badge/tests-219%20passing-success)
+![Benchmarks](https://img.shields.io/badge/benchmarks-divan-purple)
+![Binary Size](https://img.shields.io/badge/binary-1.5MB-orange)
+![Rust Edition](https://img.shields.io/badge/rust-2024-orange)
+![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)
+
+A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
 ## Supported Formats
 
