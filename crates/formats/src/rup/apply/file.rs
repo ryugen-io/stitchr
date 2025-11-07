@@ -1,7 +1,7 @@
 //! RUP file metadata parsing
 
-use super::records::{collect_records, XorRecord};
 use super::super::varint::decode_vlv;
+use super::records::{XorRecord, collect_records};
 use rom_patcher_core::{PatchError, Result};
 
 pub struct FileMeta {
@@ -32,13 +32,13 @@ pub fn parse_file_metadata(patch: &[u8], mut offset: usize) -> Result<(FileMeta,
 
     use super::super::constants::*;
     match rom_type {
-        ROM_TYPE_RAW | ROM_TYPE_NES | ROM_TYPE_FDS | ROM_TYPE_SNES | ROM_TYPE_N64
-        | ROM_TYPE_GB | ROM_TYPE_SMS | ROM_TYPE_MEGA | ROM_TYPE_PCE | ROM_TYPE_LYNX => {}
+        ROM_TYPE_RAW | ROM_TYPE_NES | ROM_TYPE_FDS | ROM_TYPE_SNES | ROM_TYPE_N64 | ROM_TYPE_GB
+        | ROM_TYPE_SMS | ROM_TYPE_MEGA | ROM_TYPE_PCE | ROM_TYPE_LYNX => {}
         _ => {
             return Err(PatchError::InvalidFormat(format!(
                 "Invalid ROM type: {}",
                 rom_type
-            )))
+            )));
         }
     }
 

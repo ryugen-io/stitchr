@@ -6,7 +6,7 @@ mod records;
 
 use super::constants::*;
 use super::helpers::*;
-use file::{parse_file_metadata, FileMeta};
+use file::{FileMeta, parse_file_metadata};
 use records::apply_xor_records;
 use rom_patcher_core::{PatchError, Result};
 
@@ -75,9 +75,11 @@ fn apply_overflow_mode(
     undo: bool,
 ) -> Result<()> {
     match (mode, undo) {
-        (OVERFLOW_APPEND, false) => {
-            overflow::apply_append(rom, &file_meta.overflow_data, file_meta.source_size as usize)
-        }
+        (OVERFLOW_APPEND, false) => overflow::apply_append(
+            rom,
+            &file_meta.overflow_data,
+            file_meta.source_size as usize,
+        ),
         (OVERFLOW_MINIFY, true) => overflow::apply_minify_undo(
             rom,
             &file_meta.overflow_data,
