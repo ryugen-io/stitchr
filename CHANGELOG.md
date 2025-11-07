@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.4.3] - 2025-11-07
+
+### Changed
+- `--only` flag now accepts multiple values in a single invocation
+  - Usage: `rompatchrs game.rom --only verify ra`
+  - Can combine multiple operations (verify, ra)
+  - More natural CLI syntax with space-separated values
+
 ## [0.4.2] - 2025-11-07
 
 ### Added

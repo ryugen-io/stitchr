@@ -21,29 +21,46 @@ pub fn execute(
     patch_path: Option<PathBuf>,
     output_path: Option<PathBuf>,
     verify: bool,
-    only_mode: Option<rom_patcher_cli::OnlyMode>,
+    only_modes: Vec<rom_patcher_cli::OnlyMode>,
 ) -> Result<()> {
-    // Generate default output path if not specified (not needed for verify-only mode)
-    let output_path = if only_mode.is_none() {
+    // Generate default output path if not specified (not needed for only-modes)
+    let output_path = if only_modes.is_empty() {
         match output_path {
             Some(path) => path,
             None => crate::utils::paths::generate_default_output(&rom_path)?,
         }
     } else {
-        // Dummy path for verify-only mode (won't be used)
+        // Dummy path for only-modes (won't be used)
         rom_path.with_extension("dummy")
     };
 
-    // Safety check: prevent overwriting input (skip in verify-only mode)
-    if only_mode.is_none() && rom_path == output_path {
+    // Safety check: prevent overwriting input (skip in only-modes)
+    if only_modes.is_empty() && rom_path == output_path {
         anyhow::bail!(
             "Input and output paths cannot be the same. Use a different output path to preserve the original ROM."
         );
     }
 
-    // Handle --only ra mode (ROM-only, no patch needed)
-    if let Some(rom_patcher_cli::OnlyMode::Ra) = only_mode {
-        return only::handle_ra_mode(&rom_path);
+    // Handle --only modes
+    if !only_modes.is_empty() {
+        for mode in &only_modes {
+            match mode {
+                rom_patcher_cli::OnlyMode::Ra => {
+                    only::handle_ra_mode(&rom_path)?;
+                }
+                rom_patcher_cli::OnlyMode::Verify => {
+                    // Verify needs patch, handled below
+                }
+            }
+        }
+
+        // If only Ra mode (no verify), we're done
+        if !only_modes
+            .iter()
+            .any(|m| matches!(m, rom_patcher_cli::OnlyMode::Verify))
+        {
+            return Ok(());
+        }
     }
 
     // For all other modes, patch is required
@@ -64,7 +81,10 @@ pub fn execute(
     );
 
     // Handle --only verify mode
-    if let Some(rom_patcher_cli::OnlyMode::Verify) = only_mode {
+    if only_modes
+        .iter()
+        .any(|m| matches!(m, rom_patcher_cli::OnlyMode::Verify))
+    {
         return only::handle_verify_mode(&original_rom, &patch_data, &patch_type);
     }
 

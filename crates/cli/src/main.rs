@@ -47,19 +47,19 @@ struct Cli {
     #[arg(long)]
     verify: bool,
 
-    /// Only perform specific operation without applying patch
-    #[arg(long, value_enum)]
-    only: Option<OnlyMode>,
+    /// Only perform specific operations without applying patch (can specify multiple)
+    #[arg(long, value_enum, num_args = 1..)]
+    only: Vec<OnlyMode>,
 }
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
-    let only_mode = cli.only.map(|m| m.into());
+    let only_modes: Vec<OnlyModeLib> = cli.only.into_iter().map(|m| m.into()).collect();
 
     // Validate: patch is required unless --only ra
-    if cli.patch.is_none() && !matches!(only_mode, Some(OnlyModeLib::Ra)) {
+    if cli.patch.is_none() && !only_modes.iter().any(|m| matches!(m, OnlyModeLib::Ra)) {
         anyhow::bail!("Patch file is required (unless using --only ra)");
     }
 
-    commands::apply::execute(cli.rom, cli.patch, cli.output, cli.verify, only_mode)
+    commands::apply::execute(cli.rom, cli.patch, cli.output, cli.verify, only_modes)
 }
