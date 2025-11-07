@@ -11,6 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 
+## [0.4.2] - 2025-11-07
+
+### Added
+- CLI `--only ra` mode for RetroAchievements checking
+  - Check ROM against RA database without patching
+  - No patch file required for this mode
+  - Displays console type, MD5 hash, and game info
+  - Useful for verifying ROM compatibility before patching
+
+### Changed
+- Patch parameter is now optional (only required when not using `--only ra`)
+- Improved CLI validation for mode-specific requirements
+
 ## [0.4.1] - 2025-11-07
 
 ### Added
