@@ -7,7 +7,7 @@ fn write_vlv(buf: &mut Vec<u8>, value: u64) {
         buf.push(0);
         return;
     }
-    let bytes_needed = ((64 - value.leading_zeros() + 7) / 8) as u8;
+    let bytes_needed = ((64 - value.leading_zeros()).div_ceil(8)) as u8;
     buf.push(bytes_needed);
     for i in 0..bytes_needed {
         buf.push((value >> (i * 8)) as u8);
