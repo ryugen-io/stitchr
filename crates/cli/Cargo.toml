@@ -29,7 +29,7 @@ validation = ["rom-patcher-features/validation"]
 retroachievements = ["rom-patcher-features/retroachievements"]
 
 [dev-dependencies]
-criterion = "0.5"
+divan = "0.1"
 
 [[bench]]
 name = "only_bench"
