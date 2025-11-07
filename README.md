@@ -2,11 +2,11 @@
 
 # rom-patcher-rs
 
-[![Rust](https://img.shields.io/badge/rust-2024-orange?logo=rust)](https://www.rust-lang.org)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
-[![Tests](https://img.shields.io/badge/tests-219%20passing-brightgreen?logo=checkmarx)](#)
-[![Benchmarks](https://img.shields.io/badge/benchmarks-divan-blueviolet?logo=measureup)](#performance)
-[![Binary](https://img.shields.io/badge/binary-1.5MB-informational?logo=files)](#)
+![Rust 2024](https://img.shields.io/badge/rust-1.91%2B-orange?logo=rust)
+![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)
+![Tests](https://img.shields.io/badge/tests-219%20passing-success)
+![Formats](https://img.shields.io/badge/formats-7%20supported-blue)
+![Safe Rust](https://img.shields.io/badge/unsafe-0%25-success)
 
 A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 
