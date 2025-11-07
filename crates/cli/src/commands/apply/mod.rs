@@ -1,6 +1,7 @@
 //! Apply patch command with transactional safety
 
 mod input;
+mod only;
 mod output;
 
 use anyhow::{Context, Result};
@@ -42,10 +43,7 @@ pub fn execute(
 
     // Handle --only ra mode (ROM-only, no patch needed)
     if let Some(rom_patcher_cli::OnlyMode::Ra) = only_mode {
-        println!("Running RetroAchievements check (ROM-only mode)");
-        let rom = input::load_rom_with_checksum(&rom_path)?;
-        crate::utils::retroachievements::check_and_display(&rom, &rom_path);
-        return Ok(());
+        return only::handle_ra_mode(&rom_path);
     }
 
     // For all other modes, patch is required
@@ -65,33 +63,9 @@ pub fn execute(
         patch_type.extension()
     );
 
-    // Handle --only mode
-    if let Some(mode) = only_mode {
-        match mode {
-            rom_patcher_cli::OnlyMode::Verify => {
-                // Only verify, don't apply patch
-                println!("Running in verify-only mode (no patching will be performed)");
-
-                // IPS format has no embedded checksums - skip verification
-                if patch_type.name() == "International Patching System" {
-                    println!(
-                        "Note: IPS format does not support checksum verification (no embedded checksums)"
-                    );
-                    return Ok(());
-                }
-
-                // Verify source checksum
-                super::verify::verify_source(&original_rom, &patch_data, &patch_type)
-                    .context("Source ROM checksum verification failed")?;
-
-                println!("Verification completed successfully!");
-                return Ok(());
-            }
-            rom_patcher_cli::OnlyMode::Ra => {
-                // Already handled above, should not reach here
-                unreachable!("Ra mode should be handled earlier")
-            }
-        }
+    // Handle --only verify mode
+    if let Some(rom_patcher_cli::OnlyMode::Verify) = only_mode {
+        return only::handle_verify_mode(&original_rom, &patch_data, &patch_type);
     }
 
     // Normal mode: apply patch with optional verification
