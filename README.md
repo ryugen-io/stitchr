@@ -151,15 +151,10 @@ just watch-test           # Watch and run tests on changes
 cargo test --all-features # Direct cargo command
 ```
 
-See [docs/TEST_TEMPLATE.md](docs/TEST_TEMPLATE.md) for test structure guidelines.
-
 ## Documentation
 
 - [CHANGELOG.md](CHANGELOG.md) - Version history and release notes
-- [ARCHITECTURE.md](ARCHITECTURE.md) - Detailed design documentation
-- [docs/TEST_TEMPLATE.md](docs/TEST_TEMPLATE.md) - Test structure guidelines
-- [docs/API.md](docs/API.md) - Complete API reference
-- [docs/CLI_USAGE.md](docs/CLI_USAGE.md) - CLI usage guide
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contributing guidelines
 - [examples/](examples/) - Code examples
 
 ## License
