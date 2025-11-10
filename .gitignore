@@ -1,33 +1,35 @@
-# Rust
-/target/
+# Rust build artifacts
+target/
 **/*.rs.bk
 *.pdb
-Cargo.lock
 
-# IDE
+# Binaries
+rompatcher-bin
+rompatcherrs
+
+# Cargo lock files (workspace has Cargo.lock)
+**/Cargo.lock
+
+# IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
 
-# MCP
-.serena/
+# Test artifacts
+*.profraw
+*.profdata
 
-# Test files - ROMs only (patches are committed)
-test_files/**/*.smc
-test_files/**/*.nes
-test_files/**/*.gba
-test_files/**/*.gb
-test_files/**/*.gbc
-test_files/**/*.sfc
-test_files/**/*.smd
-test_files/**/*.z64
-test_files/**/*.n64
-test_files/**/*.nds
-test_files/**/*.bin
-test_files/**/*.iso
+# Backup files
+*.backup
+*.old
+
+# Local development files
+.serena/
+.claude/
+AGENTS.md
