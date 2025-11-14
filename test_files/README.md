@@ -1,6 +1,6 @@
 # Test Patch Files
 
-Test patches for validating rom-patcher-rs implementation across all supported formats.
+Test patches for validating rompatcherrs implementation across all supported formats.
 
 All patches are stored as generic filenames (patch.ips, patch.bps, etc.) in their respective format directories.
 

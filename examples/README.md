@@ -1,6 +1,6 @@
 # ROM Patcher RS Examples
 
-This directory contains practical examples of using rom-patcher-rs as a library.
+This directory contains practical examples of using rompatcherrs as a library.
 
 ## Examples
 

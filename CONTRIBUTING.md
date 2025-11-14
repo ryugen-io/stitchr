@@ -1,4 +1,4 @@
-# Contributing to rom-patcher-rs
+# Contributing to rompatcherrs
 
 ## Development Workflow
 

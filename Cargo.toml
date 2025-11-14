@@ -13,7 +13,7 @@ edition = "2024"
 rust-version = "1.91"
 authors = ["Your Name <your.email@example.com>"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/yourusername/rom-patcher-rs"
+repository = "https://github.com/ryugen-io/rompatcherrs"
 
 [workspace.dependencies]
 # Shared dependencies across crates
