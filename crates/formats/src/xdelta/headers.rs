@@ -32,6 +32,13 @@ impl WindowHeader {
 
         let delta_length = parser.read_7bit_encoded_int()?;
         let target_window_length = parser.read_7bit_encoded_int()?;
+        // Safety limit: 256MB per window to prevent allocation DoS
+        if target_window_length > 256 * 1024 * 1024 {
+            return Err(PatchError::InvalidFormat(format!(
+                "Window size too large: {} bytes (max 256MB)",
+                target_window_length
+            )));
+        }
         let delta_indicator = parser.read_u8()?;
 
         if delta_indicator != 0 {

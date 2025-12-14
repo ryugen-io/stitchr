@@ -1,4 +1,4 @@
-//! VCDIFF patch application logic
+//! VCDIFF// Checked via compilation logic
 
 use crate::xdelta::{
     address_cache::{AddressCache, decode_address},

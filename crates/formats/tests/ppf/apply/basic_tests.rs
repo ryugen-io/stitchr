@@ -54,7 +54,7 @@ fn test_ppf3_apply_simple_patch() -> Result<(), PatchError> {
 #[test]
 fn test_ppf_file_apply() -> Result<(), PatchError> {
     let patch_path = PathBuf::from("../../../test_files/ppf/patch.ppf");
-    
+
     if !patch_path.exists() {
         println!("Skipping test: patch file not found at {:?}", patch_path);
         return Ok(());
@@ -62,8 +62,8 @@ fn test_ppf_file_apply() -> Result<(), PatchError> {
 
     let patch_data = std::fs::read(&patch_path).map_err(PatchError::Io)?;
     let mut rom_data = vec![0u8; 1024]; // Dummy ROM
-    
+
     let _ = PpfPatcher.apply(&mut rom_data, &patch_data);
-    
+
     Ok(())
 }

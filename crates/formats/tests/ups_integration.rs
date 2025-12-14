@@ -1,5 +1,6 @@
 //! UPS integration tests
 
+#![cfg(feature = "ups")]
 mod ups {
     mod apply;
     mod checksum_validation_tests;

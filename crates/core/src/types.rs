@@ -19,6 +19,8 @@ pub enum PatchType {
     Ppf,
     /// xdelta binary diff format
     Xdelta,
+    /// Binary Diff Format (bsdiff)
+    Bdf,
 }
 
 impl PatchType {
@@ -33,6 +35,7 @@ impl PatchType {
             Self::Rup => "rup",
             Self::Ppf => "ppf",
             Self::Xdelta => "xdelta",
+            Self::Bdf => "bdf",
         }
     }
 
@@ -47,6 +50,7 @@ impl PatchType {
             Self::Rup => "Rupture Patches",
             Self::Ppf => "PlayStation Patch Format",
             Self::Xdelta => "xdelta Binary Diff",
+            Self::Bdf => "Binary Diff Format",
         }
     }
 }

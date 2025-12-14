@@ -36,6 +36,9 @@ pub mod ppf;
 #[cfg(feature = "xdelta")]
 pub mod xdelta;
 
+#[cfg(feature = "bdf")]
+pub mod bdf;
+
 /// Auto-detect patch format from file data
 pub fn detect_format(data: &[u8]) -> Option<PatchType> {
     // EBP must be checked before IPS (both use PATCH magic)
@@ -77,6 +80,11 @@ pub fn detect_format(data: &[u8]) -> Option<PatchType> {
     #[cfg(feature = "xdelta")]
     if xdelta::XdeltaPatcher::can_handle(data) {
         return Some(PatchType::Xdelta);
+    }
+
+    #[cfg(feature = "bdf")]
+    if bdf::BdfPatcher::can_handle(data) {
+        return Some(PatchType::Bdf);
     }
 
     None

@@ -1,5 +1,6 @@
 //! APS N64 integration tests
 
+#![cfg(feature = "aps")]
 mod aps_n64 {
     mod apply;
     mod checksum_validation_tests;

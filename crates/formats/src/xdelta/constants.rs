@@ -1,4 +1,7 @@
-//! VCDIFF constants
+//! xdelta constants (VCDIFF)
+
+/// VCDIFF header (V | 0x80, C | 0x80, D | 0x80)
+pub const VCDIFF_HEADER: &[u8] = &[0xd6, 0xc3, 0xc4];
 
 // Header Indicator
 pub const VCD_DECOMPRESS: u8 = 0x01;
@@ -19,3 +22,8 @@ pub const VCD_COPY: u8 = 3;
 // Address Modes
 pub const VCD_MODE_SELF: u8 = 0;
 pub const VCD_MODE_HERE: u8 = 1;
+
+/// Secondary compressor IDs
+pub const VCD_NOCOMPRESS: u8 = 0;
+pub const VCD_DJW: u8 = 1;
+pub const VCD_LZMA: u8 = 2;

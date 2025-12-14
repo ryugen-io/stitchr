@@ -1,5 +1,6 @@
 //! BPS integration tests
 
+#![cfg(feature = "bps")]
 mod bps {
     mod apply;
     mod checksum_validation;

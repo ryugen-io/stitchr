@@ -15,13 +15,15 @@ crc32fast = "1.5"
 crc16 = "0.4"
 md5 = "0.7"
 byteorder = "1.5"
+bzip2 = "0.4"
 
 [dev-dependencies]
 divan = "0.1"
 rom-patcher-features = { path = "../features" }
+bzip2 = "0.4"
 
 [features]
-default = ["ips", "bps", "ups", "aps", "ebp", "rup", "ppf", "xdelta"]
+default = ["ips", "bps", "ups", "aps", "ebp", "rup", "ppf", "xdelta", "bdf"]
 ips = []
 bps = []
 ups = []
@@ -30,6 +32,7 @@ ebp = []
 rup = []
 ppf = []
 xdelta = []
+bdf = []
 
 [[bench]]
 name = "ips_bench"

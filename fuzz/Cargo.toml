@@ -53,3 +53,15 @@ name = "fuzz_ppf"
 path = "fuzz_targets/fuzz_ppf.rs"
 test = false
 doc = false
+
+[[bin]]
+name = "fuzz_bdf"
+path = "fuzz_targets/fuzz_bdf.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "fuzz_xdelta"
+path = "fuzz_targets/fuzz_xdelta.rs"
+test = false
+doc = false
