@@ -19,21 +19,20 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 - **APS GBA** (Game Boy Advance APS Format) - Production Ready (24 tests)
 - **EBP** (Extended Binary Patch) - Production Ready (26 tests) - IPS + JSON metadata
 - **RUP** (Rupture Patches) - Production Ready (27 tests) - Multi-file bidirectional with MD5
-- **PPF** (PlayStation Patch Format) - Planned
-- **xdelta** (Generic binary diff) - Planned
+- **PPF** (PlayStation Patch Format) - Production Ready (6 tests) - Full PPF1/2/3 support
+- **xdelta** (Generic binary diff) - Production Ready (2 tests) - VCDIFF decoder (RFC 3284)
 
 ## Features
 
 ### Implemented
-- **Apply patches:** IPS, BPS, UPS, APS N64, APS GBA, EBP, RUP formats with automatic detection
-- **Validation:** Optional CRC32 verification via --verify flag (patch integrity + source/target checksums)
-- **Hashing:** CRC32 and MD5 computation
+- **Apply patches:** IPS, BPS, UPS, APS N64, APS GBA, EBP, RUP, PPF, xdelta formats with automatic detection
+- **Validation:** Optional CRC32/Adler32 verification via --verify flag
+- **Hashing:** CRC32, Adler32, and MD5 computation
 - **RetroAchievements:** Console detection + hash verification
 - **Console Support:** GB/GBC/GBA, NDS, 3DS, PSX/PS2/PSP, SNES, NES, N64, Genesis, Master System, Game Gear
 - **Safety:** Transactional patching with automatic rollback on error
 
 ### Planned
-- RUP, PPF, xdelta format support
 - SHA-1, SHA-256 checksums
 - Additional output options and verbosity controls
 
@@ -88,9 +87,15 @@ rompatcherrs game.gba patch.ups game-patched.gba
 
 # APS N64 patches (.z64/.n64/.v64)
 rompatcherrs game.z64 patch.aps game-patched.z64
+
+# PPF patches (PlayStation)
+rompatcherrs game.bin patch.ppf game-patched.bin
+
+# xdelta patches (DS, PS2, etc.)
+rompatcherrs game.nds patch.xdelta game-patched.nds
 ```
 
-The patcher automatically detects the patch format (IPS, BPS, UPS, APS, EBP, RUP) and applies it.
+The patcher automatically detects the patch format (IPS, BPS, UPS, APS, EBP, RUP, PPF, xdelta) and applies it.
 
 ### EBP patches (IPS + JSON metadata)
 ```bash
@@ -200,11 +205,11 @@ Note: BPS/UPS checksums are optional via --verify flag. Without verification, pa
 
 ## Project Stats
 
-- **Version:** 0.3.1
-- **Test Coverage:** 183 tests
-  - Format tests: 148 (20 IPS + 28 BPS + 26 UPS + 24 APS N64 + 24 APS GBA + 26 EBP)
+- **Version:** 0.4.4
+- **Test Coverage:** 243 tests
+  - Format tests: 216 (20 IPS + 28 BPS + 26 UPS + 24 APS N64 + 24 APS GBA + 26 EBP + 27 RUP + 20 PPF + 21 xdelta)
   - Integration tests: 14 format helpers + 6 validation + 4 ROM utils
   - RetroAchievements: 11 (7 CLI + 4 features)
-- **Code Quality:** All files under 100 lines (modular structure)
+- **Code Quality:** All files under 200 lines (modular structure)
 - **Build Time:** ~4s (release with LTO)
 - **Binary Size:** 1.4MB (with RetroAchievements, optimized with minreq + manual JSON parser)
