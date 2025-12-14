@@ -4,6 +4,7 @@
 //! It is commonly used for patching larger files like NDS/PS2/PSP games.
 
 mod address_cache;
+mod checksum;
 mod code_table;
 mod decoder;
 
