@@ -4,7 +4,7 @@
 
 ![Rust 2024](https://img.shields.io/badge/rust-1.91%2B-orange?logo=rust)
 ![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)
-![Tests](https://img.shields.io/badge/tests-219%20passing-success)
+![Tests](https://img.shields.io/badge/tests-243%20passing-success)
 ![Formats](https://img.shields.io/badge/formats-7%20supported-blue)
 ![Safe Rust](https://img.shields.io/badge/unsafe-0%25-success)
 
