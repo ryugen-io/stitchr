@@ -19,8 +19,8 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 - **APS GBA** (Game Boy Advance APS Format) - Production Ready (24 tests)
 - **EBP** (Extended Binary Patch) - Production Ready (26 tests) - IPS + JSON metadata
 - **RUP** (Rupture Patches) - Production Ready (27 tests) - Multi-file bidirectional with MD5
-- **PPF** (PlayStation Patch Format) - Production Ready (6 tests) - Full PPF1/2/3 support
-- **xdelta** (Generic binary diff) - Production Ready (2 tests) - VCDIFF decoder (RFC 3284)
+- **PPF** (PlayStation Patch Format) - Production Ready (20 tests) - Full PPF1/2/3 support
+- **xdelta** (Generic binary diff) - Production Ready (21 tests) - VCDIFF decoder (RFC 3284)
 
 ## Features
 
