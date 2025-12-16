@@ -3,7 +3,7 @@
 use super::constants::*;
 use super::varint;
 use crc32fast;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Parse BPS header and return (source_size, target_size, data_offset)
 pub fn parse_header(patch: &[u8]) -> Result<(u64, u64, usize)> {

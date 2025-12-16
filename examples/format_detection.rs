@@ -7,8 +7,8 @@
 //!
 //! Run with: cargo run --example format_detection
 
-use rom_patcher_core::{PatchFormat, PatchType};
-use rom_patcher_formats::{detect_format, ips::IpsPatcher};
+use stitchr_core::{PatchFormat, PatchType};
+use stitchr_formats::{detect_format, ips::IpsPatcher};
 use std::fs;
 
 fn apply_patch_auto(rom: &mut Vec<u8>, patch: &[u8]) -> anyhow::Result<PatchType> {

@@ -2,7 +2,7 @@
 
 use super::super::varint::decode_vlv;
 use super::records::{XorRecord, collect_records};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 pub struct FileMeta {
     pub source_size: u64,

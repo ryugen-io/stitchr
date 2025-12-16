@@ -1,6 +1,6 @@
 //! Validation feature trait
 
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 use super::types::HashAlgorithm;
 

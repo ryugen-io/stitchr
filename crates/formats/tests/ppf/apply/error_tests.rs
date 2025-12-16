@@ -1,7 +1,7 @@
 //! PPF error handling tests
 
-use rom_patcher_core::{PatchError, PatchFormat};
-use rom_patcher_formats::ppf::PpfPatcher;
+use stitchr_core::{PatchError, PatchFormat};
+use stitchr_formats::ppf::PpfPatcher;
 
 #[test]
 fn test_apply_too_small_rom() {

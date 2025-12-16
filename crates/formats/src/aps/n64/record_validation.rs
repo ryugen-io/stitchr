@@ -1,7 +1,7 @@
 //! APS N64 record validation
 
 use super::constants::*;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Validate all records in patch data
 pub fn validate_records(patch: &[u8], mut offset: usize) -> Result<()> {

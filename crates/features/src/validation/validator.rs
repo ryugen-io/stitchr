@@ -1,8 +1,8 @@
 //! Validator implementation
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
-use super::algorithms::{md5, sha};
+use super::algorithms::{adler32, crc32, md5, sha};
 use super::trait_def::ValidationFeature;
 use super::types::HashAlgorithm;
 
@@ -17,7 +17,12 @@ impl Validator {
 
     /// Compute CRC32 checksum
     pub fn crc32(data: &[u8]) -> u32 {
-        crc32fast::hash(data)
+        crc32::compute(data)
+    }
+
+    /// Compute Adler32 checksum
+    pub fn adler32(data: &[u8]) -> u32 {
+        adler32::compute(data)
     }
 
     /// Compute checksum/hash based on algorithm
@@ -26,6 +31,10 @@ impl Validator {
             HashAlgorithm::Crc32 => {
                 let crc = Self::crc32(data);
                 crc.to_be_bytes().to_vec()
+            }
+            HashAlgorithm::Adler32 => {
+                let checksum = Self::adler32(data);
+                checksum.to_be_bytes().to_vec()
             }
             HashAlgorithm::Md5 => {
                 let hash = md5::compute(data);

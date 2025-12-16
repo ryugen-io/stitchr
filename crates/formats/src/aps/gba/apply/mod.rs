@@ -1,6 +1,6 @@
 use super::constants::*;
 use super::helpers::{parse_header, parse_record};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 pub fn apply(rom: &[u8], patch: &[u8]) -> Result<Vec<u8>> {
     let (header, mut offset) = parse_header(patch)?;

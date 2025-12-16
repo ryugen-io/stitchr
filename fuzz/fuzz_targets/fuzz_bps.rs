@@ -1,7 +1,7 @@
 #![no_main]
 use libfuzzer_sys::fuzz_target;
-use rom_patcher_formats::bps::BpsPatcher;
-use rom_patcher_core::PatchFormat;
+use stitchr_formats::bps::BpsPatcher;
+use stitchr_core::PatchFormat;
 
 fuzz_target!(|data: &[u8]| {
     let _ = BpsPatcher::validate(data);

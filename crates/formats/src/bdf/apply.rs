@@ -3,7 +3,7 @@
 use crate::bdf::validate;
 use byteorder::{LittleEndian, ReadBytesExt};
 use bzip2::read::BzDecoder;
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 use std::io::{Cursor, Read, Seek, SeekFrom};
 
 /// Apply BDF patch to ROM
@@ -18,7 +18,7 @@ pub fn apply_patch(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
     let patched_size = cursor.read_u64::<LittleEndian>()? as usize;
 
     if patched_size > crate::bdf::constants::MAX_PATCHED_SIZE {
-        return Err(rom_patcher_core::PatchError::InvalidFormat(format!(
+        return Err(stitchr_core::PatchError::InvalidFormat(format!(
             "Target size too large: {} bytes (max {})",
             patched_size,
             crate::bdf::constants::MAX_PATCHED_SIZE

@@ -1,6 +1,6 @@
 use divan::Bencher;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::rup::RupPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::rup::RupPatcher;
 
 fn main() {
     divan::main();

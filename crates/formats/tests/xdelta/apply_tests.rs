@@ -1,7 +1,7 @@
 //! xdelta apply tests
 
-use rom_patcher_core::{PatchError, PatchFormat};
-use rom_patcher_formats::xdelta::XdeltaPatcher;
+use stitchr_core::{PatchError, PatchFormat};
+use stitchr_formats::xdelta::XdeltaPatcher;
 use std::path::PathBuf;
 
 #[test]

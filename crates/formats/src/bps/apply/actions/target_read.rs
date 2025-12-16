@@ -1,7 +1,7 @@
 //! TARGET_READ action handler
 
 use super::ActionContext;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Execute TARGET_READ action
 #[inline]

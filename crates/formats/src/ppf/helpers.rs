@@ -5,7 +5,7 @@
 
 use crate::ppf::constants::*;
 use byteorder::{LittleEndian, ReadBytesExt};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 use std::io::{Read, Seek, SeekFrom};
 
 #[derive(Debug)]

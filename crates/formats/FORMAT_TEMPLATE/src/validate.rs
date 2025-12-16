@@ -2,7 +2,7 @@
 
 use super::constants::{MAGIC, MAGIC_SIZE};
 use super::helpers;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Check if data is a valid FORMAT_NAME patch
 pub fn can_handle(data: &[u8]) -> bool {

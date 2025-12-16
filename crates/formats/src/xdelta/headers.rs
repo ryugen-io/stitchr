@@ -4,7 +4,7 @@ use crate::xdelta::{
     constants::{VCD_ADLER32, VCD_SOURCE, VCD_TARGET},
     parser::VcdiffParser,
 };
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 use std::io::Read;
 
 pub struct WindowHeader {

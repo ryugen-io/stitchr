@@ -1,7 +1,7 @@
 //! Validation utilities for CLI
 
 #[cfg(feature = "validation")]
-use rom_patcher_features::validation::{HashAlgorithm, ValidationFeature, Validator};
+use stitchr_features::validation::{HashAlgorithm, ValidationFeature, Validator};
 
 /// Compute CRC32 checksum of data
 #[cfg(feature = "validation")]

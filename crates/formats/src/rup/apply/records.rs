@@ -2,7 +2,7 @@
 
 use super::super::constants::*;
 use super::super::varint::decode_vlv;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 pub struct XorRecord {
     pub offset: u64,

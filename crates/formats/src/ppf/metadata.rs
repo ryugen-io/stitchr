@@ -3,7 +3,7 @@
 //! This module provides functionality to extract metadata from PPF patch files.
 
 use crate::ppf::helpers::parse_header;
-use rom_patcher_core::{PatchError, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchError, PatchMetadata, PatchType, Result};
 use std::io::{Cursor, Read, Seek, SeekFrom};
 
 /// Extracts metadata from a PPF patch.

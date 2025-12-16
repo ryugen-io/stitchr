@@ -1,7 +1,7 @@
 use bzip2::Compression;
 use bzip2::write::BzEncoder;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bdf::{BdfPatcher, constants::BDF_MAGIC};
+use stitchr_core::PatchFormat;
+use stitchr_formats::bdf::{BdfPatcher, constants::BDF_MAGIC};
 use std::io::Write;
 
 fn create_valid_bzip_block(data: &[u8]) -> Vec<u8> {

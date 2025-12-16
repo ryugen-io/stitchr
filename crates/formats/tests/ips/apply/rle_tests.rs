@@ -1,7 +1,7 @@
 //! IPS RLE compression tests
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ips::IpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ips::IpsPatcher;
 
 #[test]
 fn test_apply_rle_compression() {

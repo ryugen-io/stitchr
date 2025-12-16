@@ -1,6 +1,6 @@
 use divan::Bencher;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bps::BpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::bps::BpsPatcher;
 
 fn main() {
     divan::main();

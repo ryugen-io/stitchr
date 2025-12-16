@@ -1,5 +1,5 @@
 #![allow(clippy::useless_vec)]
-use rom_patcher_cli::OnlyMode;
+use stitchr_cli::OnlyMode;
 
 fn main() {
     divan::main();

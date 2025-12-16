@@ -1,9 +1,9 @@
 //! Validation feature tests
 
-use rom_patcher_features::validation::{HashAlgorithm, ValidationFeature, Validator};
+use stitchr_features::validation::{HashAlgorithm, ValidationFeature, Validator};
 
 #[cfg(feature = "validation")]
-use rom_patcher_features::validation::algorithms::md5;
+use stitchr_features::validation::algorithms::md5;
 
 #[test]
 fn test_crc32_empty() {

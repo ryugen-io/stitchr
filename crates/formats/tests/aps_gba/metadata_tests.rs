@@ -1,7 +1,7 @@
 //! Metadata extraction tests for APS GBA
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::gba::ApsGbaPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::gba::ApsGbaPatcher;
 
 const BLOCK_SIZE: usize = 0x10000;
 

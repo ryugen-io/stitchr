@@ -9,7 +9,7 @@ use std::path::PathBuf;
 mod commands;
 mod utils;
 
-use rom_patcher_cli::OnlyMode as OnlyModeLib;
+use stitchr_cli::OnlyMode as OnlyModeLib;
 
 /// Operation mode for --only flag
 #[derive(ValueEnum, Clone, Debug)]

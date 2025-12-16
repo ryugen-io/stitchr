@@ -1,5 +1,5 @@
 [package]
-name = "rom-patcher-cli"
+name = "stitchr-cli"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -9,7 +9,7 @@ repository.workspace = true
 description = "Command-line interface for ROM patching"
 
 [lib]
-name = "rom_patcher_cli"
+name = "stitchr_cli"
 path = "src/lib.rs"
 
 [[bin]]
@@ -17,16 +17,16 @@ name = "stitchr"
 path = "src/main.rs"
 
 [dependencies]
-rom-patcher-core = { path = "../core" }
-rom-patcher-formats = { path = "../formats" }
-rom-patcher-features = { path = "../features" }
+stitchr-core = { path = "../core" }
+stitchr-formats = { path = "../formats" }
+stitchr-features = { path = "../features" }
 anyhow.workspace = true
 clap = { version = "4.5", features = ["derive"] }
 
 [features]
 default = ["validation", "retroachievements"]
-validation = ["rom-patcher-features/validation"]
-retroachievements = ["rom-patcher-features/retroachievements"]
+validation = ["stitchr-features/validation"]
+retroachievements = ["stitchr-features/retroachievements"]
 
 [dev-dependencies]
 divan = "0.1"

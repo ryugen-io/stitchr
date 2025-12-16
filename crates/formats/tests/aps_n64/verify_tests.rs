@@ -1,7 +1,7 @@
 //! Tests for APS N64 checksum verification
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::n64::ApsN64Patcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::n64::ApsN64Patcher;
 
 const N64_CART_ID_OFFSET: usize = 0x3C;
 const N64_CRC_OFFSET: usize = 0x10;

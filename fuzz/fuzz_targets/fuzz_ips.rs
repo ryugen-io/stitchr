@@ -1,7 +1,7 @@
 #![no_main]
 use libfuzzer_sys::fuzz_target;
-use rom_patcher_formats::ips::IpsPatcher;
-use rom_patcher_core::PatchFormat;
+use stitchr_formats::ips::IpsPatcher;
+use stitchr_core::PatchFormat;
 
 fuzz_target!(|data: &[u8]| {
     // Only fuzz if it looks somewhat like IPS or if we want to force it.

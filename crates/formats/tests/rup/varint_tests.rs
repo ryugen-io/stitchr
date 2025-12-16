@@ -1,6 +1,6 @@
 //! Tests for RUP VLV (Variable-Length Value) encoding
 
-use rom_patcher_formats::rup::varint::decode_vlv;
+use stitchr_formats::rup::varint::decode_vlv;
 
 #[test]
 fn test_decode_zero() {

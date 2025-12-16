@@ -1,7 +1,7 @@
 #![no_main]
 use libfuzzer_sys::fuzz_target;
-use rom_patcher_formats::ebp::EbpPatcher;
-use rom_patcher_core::PatchFormat;
+use stitchr_formats::ebp::EbpPatcher;
+use stitchr_core::PatchFormat;
 
 fuzz_target!(|data: &[u8]| {
     let _ = EbpPatcher::validate(data);

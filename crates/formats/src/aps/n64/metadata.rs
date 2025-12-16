@@ -1,7 +1,7 @@
 //! APS N64 metadata extraction
 
 use super::helpers::parse_header;
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 /// Metadata extracted from APS N64 patch
 #[derive(Debug, Clone)]

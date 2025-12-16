@@ -1,7 +1,7 @@
 #![no_main]
 use libfuzzer_sys::fuzz_target;
-use rom_patcher_formats::bdf::BdfPatcher;
-use rom_patcher_core::PatchFormat;
+use stitchr_formats::bdf::BdfPatcher;
+use stitchr_core::PatchFormat;
 
 fuzz_target!(|data: &[u8]| {
     // 1. Fuzz validation

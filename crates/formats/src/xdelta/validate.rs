@@ -1,7 +1,7 @@
 //! xdelta validation
 
 use super::constants::VCDIFF_HEADER;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Check if the patch data has xdelta magic
 pub fn can_handle(data: &[u8]) -> bool {

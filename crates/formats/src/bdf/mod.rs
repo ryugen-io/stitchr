@@ -2,7 +2,7 @@
 //!
 //! Based on bsdiff format (BSDIFF40 magic), which uses bzip2 compression.
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, Result};
 
 pub mod apply;
 pub mod constants;

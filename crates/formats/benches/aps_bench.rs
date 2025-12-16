@@ -1,7 +1,7 @@
 use divan::Bencher;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::gba::ApsGbaPatcher;
-use rom_patcher_formats::aps::n64::ApsN64Patcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::gba::ApsGbaPatcher;
+use stitchr_formats::aps::n64::ApsN64Patcher;
 
 fn main() {
     divan::main();

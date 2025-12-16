@@ -4,7 +4,7 @@ mod records;
 
 use super::constants::*;
 use super::helpers::{parse_header, validate_source_rom};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Apply APS N64 patch to ROM
 pub fn apply(rom: &[u8], patch: &[u8]) -> Result<Vec<u8>> {

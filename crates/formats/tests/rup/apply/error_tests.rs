@@ -1,7 +1,7 @@
 //! RUP error handling tests
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::rup::RupPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::rup::RupPatcher;
 
 #[test]
 fn test_apply_wrong_magic() {

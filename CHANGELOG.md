@@ -26,8 +26,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Modular structure (parser, headers, apply, address_cache)
   - Integration tests (21 tests) covering headers, cache, errors, and basic application
 
+### Changed
+- **Hash Algorithm Refactoring**: Consolidated all hash algorithms in `features/validation/algorithms/`
+  - Added `crc32.rs` wrapper around crc32fast crate
+  - Moved Adler32 from `formats/xdelta/checksum.rs` to `features/validation/algorithms/adler32.rs`
+  - Added `Adler32` variant to `HashAlgorithm` enum
+  - Updated `Validator` to use unified algorithm modules
+  - All hash functions now accessible via consistent API: `algorithms::{crc32, adler32, md5, sha}::compute()`
+
 ### Planned
-- SHA-1, SHA-256 hash algorithms
 - Additional CLI commands (info, validate)
 ## [0.4.4] - 2025-12-14
 
@@ -52,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - `--only` flag now accepts multiple values in a single invocation
-  - Usage: `rompatchrs game.rom --only verify ra`
+  - Usage: `stitchr game.rom --only verify ra`
   - Can combine multiple operations (verify, ra)
   - More natural CLI syntax with space-separated values
 
@@ -524,7 +531,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Rate limiting now uses file-based storage (XDG_CACHE_HOME) instead of in-process mutex
-- Rate limiting now works across multiple process invocations (multiple rompatch calls)
+- Rate limiting now works across multiple process invocations (multiple stitchr calls)
 
 ### Fixed
 - Rate limiter now properly prevents API spam when user runs multiple patches quickly

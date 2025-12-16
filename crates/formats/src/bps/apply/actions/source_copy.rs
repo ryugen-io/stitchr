@@ -3,7 +3,7 @@
 use super::ActionContext;
 use crate::bps::helpers::decode_signed_delta;
 use crate::bps::varint;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Execute SOURCE_COPY action
 #[inline]

@@ -2,7 +2,7 @@
 
 use super::constants::MAGIC_SIZE;
 use super::varint;
-use rom_patcher_core::{PatchError, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchError, PatchMetadata, PatchType, Result};
 
 /// Extract metadata from a BPS patch
 ///

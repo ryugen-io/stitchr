@@ -1,6 +1,6 @@
 use super::constants::*;
 use super::helpers::parse_header;
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 pub fn can_handle(data: &[u8]) -> bool {
     data.len() >= MAGIC_LEN && &data[0..MAGIC_LEN] == MAGIC
@@ -10,14 +10,14 @@ pub fn validate(patch: &[u8]) -> Result<()> {
     parse_header(patch)?;
 
     if patch.len() < MIN_PATCH_SIZE {
-        return Err(rom_patcher_core::PatchError::InvalidFormat(
+        return Err(stitchr_core::PatchError::InvalidFormat(
             "Patch too small to contain records".to_string(),
         ));
     }
 
     let remaining = patch.len() - HEADER_SIZE;
     if !remaining.is_multiple_of(RECORD_SIZE) {
-        return Err(rom_patcher_core::PatchError::InvalidFormat(
+        return Err(stitchr_core::PatchError::InvalidFormat(
             "Invalid record alignment".to_string(),
         ));
     }

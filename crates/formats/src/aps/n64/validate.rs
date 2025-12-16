@@ -3,7 +3,7 @@
 use super::constants::*;
 use super::helpers::parse_header;
 use super::record_validation;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Check if data is a valid APS N64 patch
 pub fn can_handle(data: &[u8]) -> bool {

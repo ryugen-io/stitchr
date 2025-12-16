@@ -1,6 +1,6 @@
 //! xdelta parser unit tests
 
-use rom_patcher_formats::xdelta::parser::VcdiffParser;
+use stitchr_formats::xdelta::parser::VcdiffParser;
 
 #[test]
 fn test_read_7bit_int_single_byte() {

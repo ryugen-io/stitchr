@@ -3,7 +3,7 @@
 use super::constants::{FOOTER_SIZE, MAGIC, MAGIC_SIZE};
 use super::varint;
 use crc32fast;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Check if data is a valid BPS patch (magic header check)
 pub fn can_handle(data: &[u8]) -> bool {

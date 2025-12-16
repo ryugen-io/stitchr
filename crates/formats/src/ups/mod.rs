@@ -8,7 +8,7 @@ mod validate;
 
 pub mod varint;
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, Result};
 
 pub struct UpsPatcher;
 

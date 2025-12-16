@@ -1,7 +1,7 @@
 //! Tests for RUP metadata extraction
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::rup::RupPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::rup::RupPatcher;
 use std::fs;
 
 #[test]
@@ -13,7 +13,7 @@ fn test_metadata_from_real_patch() {
     let patch = fs::read(patch_path).expect("Failed to read RUP patch");
     let metadata = RupPatcher::metadata(&patch).expect("Failed to extract metadata");
 
-    assert_eq!(metadata.patch_type, rom_patcher_core::PatchType::Rup);
+    assert_eq!(metadata.patch_type, stitchr_core::PatchType::Rup);
     assert!(metadata.source_size.is_some());
     assert!(metadata.target_size.is_some());
 }

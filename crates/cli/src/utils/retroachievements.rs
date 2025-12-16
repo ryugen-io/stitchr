@@ -1,7 +1,7 @@
 //! RetroAchievements hash checking utilities
 
-use rom_patcher_features::retroachievements::{Console, game_url, lookup_game_by_hash};
-use rom_patcher_features::validation::algorithms::md5;
+use stitchr_features::retroachievements::{Console, game_url, lookup_game_by_hash};
+use stitchr_features::validation::algorithms::md5;
 use std::path::Path;
 
 /// Detect console type from file extension

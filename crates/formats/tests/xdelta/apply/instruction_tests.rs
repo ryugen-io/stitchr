@@ -1,8 +1,8 @@
 //! xdelta instruction tests
 
 use crate::xdelta::helpers::{VcdiffWindowBuilder, prepend_header};
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::xdelta::XdeltaPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::xdelta::XdeltaPatcher;
 
 #[test]
 fn test_inst_add_embedded_size() {

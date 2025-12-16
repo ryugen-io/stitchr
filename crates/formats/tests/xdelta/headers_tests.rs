@@ -1,6 +1,6 @@
 //! xdelta header parsing tests
 
-use rom_patcher_formats::xdelta::{headers::WindowHeader, parser::VcdiffParser};
+use stitchr_formats::xdelta::{headers::WindowHeader, parser::VcdiffParser};
 
 #[test]
 fn test_decode_window_header_minimal() {

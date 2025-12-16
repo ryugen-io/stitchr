@@ -1,7 +1,7 @@
 //! Integration tests for APS N64 with real ROM patches
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::n64::ApsN64Patcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::n64::ApsN64Patcher;
 use std::fs;
 use std::path::PathBuf;
 

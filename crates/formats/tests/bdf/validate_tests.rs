@@ -1,5 +1,5 @@
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bdf::{BdfPatcher, constants::BDF_MAGIC};
+use stitchr_core::PatchFormat;
+use stitchr_formats::bdf::{BdfPatcher, constants::BDF_MAGIC};
 
 #[test]
 fn test_can_handle() {

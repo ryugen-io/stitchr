@@ -1,7 +1,7 @@
 //! PPF metadata extraction tests.
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ppf::PpfPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ppf::PpfPatcher;
 
 #[test]
 fn test_metadata_simple_ppf3() {

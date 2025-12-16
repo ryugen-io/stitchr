@@ -1,6 +1,6 @@
 //! RUP Variable-Length Value (VLV) encoding
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Decode a RUP VLV value
 ///

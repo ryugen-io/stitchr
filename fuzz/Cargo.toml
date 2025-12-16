@@ -1,5 +1,5 @@
 [package]
-name = "rom-patcher-fuzz"
+name = "stitchr-fuzz"
 version = "0.0.0"
 publish = false
 edition = "2024"
@@ -11,8 +11,8 @@ cargo-fuzz = true
 
 [dependencies]
 libfuzzer-sys = "0.4"
-rom-patcher-core = { path = "../crates/core" }
-rom-patcher-formats = { path = "../crates/formats" }
+stitchr-core = { path = "../crates/core" }
+stitchr-formats = { path = "../crates/formats" }
 
 [[bin]]
 name = "fuzz_detect"

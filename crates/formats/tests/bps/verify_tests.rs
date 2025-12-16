@@ -1,7 +1,7 @@
 //! Tests for BPS checksum verification
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bps::BpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::bps::BpsPatcher;
 
 #[test]
 fn test_verify_input_rom() {

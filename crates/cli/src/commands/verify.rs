@@ -1,8 +1,8 @@
 //! Checksum verification for patches
 
 use anyhow::Result;
-use rom_patcher_core::{PatchFormat, PatchType};
-use rom_patcher_formats::{
+use stitchr_core::{PatchFormat, PatchType};
+use stitchr_formats::{
     aps::ApsPatcher, bps::BpsPatcher, ebp::EbpPatcher, ips::IpsPatcher, rup::RupPatcher,
     ups::UpsPatcher,
 };

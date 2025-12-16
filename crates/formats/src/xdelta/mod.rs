@@ -5,7 +5,6 @@
 
 pub mod address_cache;
 mod apply;
-mod checksum;
 mod code_table;
 pub mod constants;
 pub mod headers;
@@ -13,7 +12,7 @@ pub mod metadata;
 pub mod parser;
 pub mod validate;
 
-use rom_patcher_core::{PatchError, PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchError, PatchFormat, PatchMetadata, Result};
 
 /// xdelta format patcher
 pub struct XdeltaPatcher;

@@ -4,7 +4,7 @@ mod records;
 
 use crate::ips::constants::{EOF_MARKER, HEADER};
 use crate::ips::io::read_u24_be;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Apply IPS patch to ROM data
 pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {

@@ -1,7 +1,7 @@
 //! Tests for BPS metadata extraction
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bps::BpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::bps::BpsPatcher;
 
 fn write_varint(buf: &mut Vec<u8>, mut data: u64) {
     loop {

@@ -1,8 +1,8 @@
 //! Integration tests for BPS with real ROM patches
 
 use super::helpers::*;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bps::BpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::bps::BpsPatcher;
 use std::fs;
 
 #[test]

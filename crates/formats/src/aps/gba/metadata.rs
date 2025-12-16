@@ -1,6 +1,6 @@
 use super::constants::*;
 use super::helpers::parse_header;
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 pub struct Metadata {
     pub source_size: u32,

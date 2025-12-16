@@ -2,7 +2,7 @@
 
 use super::constants::*;
 use super::helpers;
-use rom_patcher_core::{PatchError, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchError, PatchMetadata, PatchType, Result};
 
 /// Extract metadata from FORMAT_NAME patch
 pub fn extract(patch: &[u8]) -> Result<PatchMetadata> {

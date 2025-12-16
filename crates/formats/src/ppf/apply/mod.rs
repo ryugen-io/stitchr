@@ -4,7 +4,7 @@
 
 use crate::ppf::{constants::*, validate::*};
 use byteorder::{LittleEndian, ReadBytesExt};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 use std::io::{Cursor, Read, Seek, SeekFrom};
 
 /// Applies a PPF patch to the provided ROM data.

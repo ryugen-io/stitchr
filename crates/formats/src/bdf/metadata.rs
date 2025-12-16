@@ -2,7 +2,7 @@
 
 use crate::bdf::constants::{BDF_MAGIC, HEADER_SIZE};
 use byteorder::{LittleEndian, ReadBytesExt};
-use rom_patcher_core::{PatchError, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchError, PatchMetadata, PatchType, Result};
 use std::io::{Cursor, Seek, SeekFrom};
 
 /// Extract metadata from BDF patch

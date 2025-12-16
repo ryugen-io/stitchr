@@ -1,6 +1,6 @@
 //! RetroAchievements types and hash checker
 
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 /// Supported console types for RetroAchievements
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

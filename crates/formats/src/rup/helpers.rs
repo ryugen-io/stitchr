@@ -1,7 +1,7 @@
 //! RUP helper functions
 
 use super::constants::*;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Compute MD5 hash of data
 pub fn compute_md5(data: &[u8]) -> [u8; 16] {

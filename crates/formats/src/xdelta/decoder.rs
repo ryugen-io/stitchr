@@ -2,10 +2,10 @@
 
 use crate::xdelta::{
     address_cache::AddressCache,
-    checksum::adler32,
     code_table::{VCD_ADD, VCD_COPY, VCD_NOOP, VCD_RUN, get_default_code_table},
 };
-use rom_patcher_core::{PatchError, Result};
+use stitchr_features::validation::algorithms::adler32;
+use stitchr_core::{PatchError, Result};
 use std::io::{Cursor, Read, Seek, SeekFrom};
 
 // Header Indicator
@@ -315,7 +315,7 @@ pub fn apply_patch(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
         // Verify Adler32
         if let Some(expected_checksum) = win_header.adler32 {
             let window_data = &target[target_window_start_index..];
-            let actual_checksum = adler32(window_data);
+            let actual_checksum = adler32::compute(window_data);
             if actual_checksum != expected_checksum {
                 return Err(PatchError::ChecksumMismatch {
                     expected: expected_checksum,

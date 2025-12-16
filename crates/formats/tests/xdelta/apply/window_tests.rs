@@ -1,8 +1,8 @@
 //! xdelta window tests
 
 use crate::xdelta::helpers::{VcdiffWindowBuilder, prepend_header};
-use rom_patcher_core::{PatchError, PatchFormat};
-use rom_patcher_formats::xdelta::XdeltaPatcher;
+use stitchr_core::{PatchError, PatchFormat};
+use stitchr_formats::xdelta::XdeltaPatcher;
 
 #[test]
 fn test_apply_multi_window_concatenation() {

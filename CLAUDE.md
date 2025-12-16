@@ -1,10 +1,10 @@
-# CLAUDE.md - AI Assistant Guide for rompatcherrs
+# CLAUDE.md - AI Assistant Guide for stitchr
 
-This document provides comprehensive guidance for AI assistants working with the rompatcherrs codebase.
+This document provides comprehensive guidance for AI assistants working with the stitchr codebase.
 
 ## Project Overview
 
-**Project Name**: rompatcherrs (binary: `rompatchrs`)
+**Project Name**: stitchr (binary: `stitchr`)
 **Type**: Rust CLI application with library crates
 **Purpose**: Modern, modular ROM patcher supporting multiple patch formats
 **Version**: 0.4.3
@@ -34,7 +34,7 @@ This document provides comprehensive guidance for AI assistants working with the
 ### Workspace Architecture
 
 ```
-/home/user/rompatcher-rs/
+/home/user/stitchr/
 ├── Cargo.toml              # Workspace root
 ├── justfile                # Task automation (use `just <command>`)
 ├── clippy.toml             # Linter configuration
@@ -87,27 +87,27 @@ This document provides comprehensive guidance for AI assistants working with the
 ### Key File Locations
 
 **Entry Points**:
-- CLI: `/home/user/rompatcher-rs/crates/cli/src/main.rs`
-- Core: `/home/user/rompatcher-rs/crates/core/src/lib.rs`
-- Formats: `/home/user/rompatcher-rs/crates/formats/src/lib.rs`
+- CLI: `/home/user/stitchr/crates/cli/src/main.rs`
+- Core: `/home/user/stitchr/crates/core/src/lib.rs`
+- Formats: `/home/user/stitchr/crates/formats/src/lib.rs`
 
 **Core Trait**:
-- `/home/user/rompatcher-rs/crates/core/src/format.rs` - `PatchFormat` trait
+- `/home/user/stitchr/crates/core/src/format.rs` - `PatchFormat` trait
 
 **Format Implementations**:
-- IPS: `/home/user/rompatcher-rs/crates/formats/src/ips/`
-- BPS: `/home/user/rompatcher-rs/crates/formats/src/bps/`
-- UPS: `/home/user/rompatcher-rs/crates/formats/src/ups/`
-- APS: `/home/user/rompatcher-rs/crates/formats/src/aps/`
-- EBP: `/home/user/rompatcher-rs/crates/formats/src/ebp/`
-- RUP: `/home/user/rompatcher-rs/crates/formats/src/rup/`
+- IPS: `/home/user/stitchr/crates/formats/src/ips/`
+- BPS: `/home/user/stitchr/crates/formats/src/bps/`
+- UPS: `/home/user/stitchr/crates/formats/src/ups/`
+- APS: `/home/user/stitchr/crates/formats/src/aps/`
+- EBP: `/home/user/stitchr/crates/formats/src/ebp/`
+- RUP: `/home/user/stitchr/crates/formats/src/rup/`
 
 **Dispatchers**:
-- `/home/user/rompatcher-rs/crates/cli/src/commands/dispatch.rs`
-- `/home/user/rompatcher-rs/crates/cli/src/commands/verify.rs`
+- `/home/user/stitchr/crates/cli/src/commands/dispatch.rs`
+- `/home/user/stitchr/crates/cli/src/commands/verify.rs`
 
 **Templates**:
-- `/home/user/rompatcher-rs/crates/formats/FORMAT_TEMPLATE/`
+- `/home/user/stitchr/crates/formats/FORMAT_TEMPLATE/`
 
 ## Core Design Patterns
 
@@ -234,13 +234,13 @@ Before committing:
 ### Naming Conventions
 
 **Crate Names** (hyphenated):
-- `rom-patcher-core`
-- `rom-patcher-formats`
-- `rom-patcher-features`
-- `rom-patcher-cli`
+- `stitchr-core`
+- `stitchr-formats`
+- `stitchr-features`
+- `stitchr-cli`
 
 **Binary Name** (no hyphens):
-- `rompatchrs`
+- `stitchr`
 
 **Module Names** (snake_case):
 - `apply_patch`, `validation`, `retroachievements`
@@ -414,7 +414,7 @@ git commit -m "Add FORMAT_NAME validation logic"
 
 ### Cargo.toml (Workspace Root)
 
-Location: `/home/user/rompatcher-rs/Cargo.toml`
+Location: `/home/user/stitchr/Cargo.toml`
 
 **Key Settings**:
 - Edition: 2024
@@ -423,7 +423,7 @@ Location: `/home/user/rompatcher-rs/Cargo.toml`
 
 ### clippy.toml
 
-Location: `/home/user/rompatcher-rs/clippy.toml`
+Location: `/home/user/stitchr/clippy.toml`
 
 **Key Settings**:
 - MSRV: 1.91
@@ -431,7 +431,7 @@ Location: `/home/user/rompatcher-rs/clippy.toml`
 
 ### rustfmt.toml
 
-Location: `/home/user/rompatcher-rs/rustfmt.toml`
+Location: `/home/user/stitchr/rustfmt.toml`
 
 **Key Settings**:
 - Edition: 2024
@@ -442,7 +442,7 @@ Location: `/home/user/rompatcher-rs/rustfmt.toml`
 
 ### deny.toml
 
-Location: `/home/user/rompatcher-rs/deny.toml`
+Location: `/home/user/stitchr/deny.toml`
 
 **Purpose**: Cargo-deny configuration for:
 - License validation (MIT, Apache-2.0, MPL-2.0, ISC, Unicode-3.0)
@@ -478,8 +478,8 @@ retroachievements = ["md5", "minreq"]
 
 ```toml
 default = ["validation", "retroachievements"]
-validation = ["rom-patcher-features/validation"]
-retroachievements = ["rom-patcher-features/retroachievements"]
+validation = ["stitchr-features/validation"]
+retroachievements = ["stitchr-features/retroachievements"]
 ```
 
 ## Dependencies
@@ -492,23 +492,23 @@ retroachievements = ["rom-patcher-features/retroachievements"]
 - `thiserror = "2.0"`
 
 ### Formats
-- `rom-patcher-core` (workspace)
+- `stitchr-core` (workspace)
 - `thiserror = "2.0"`
 - `crc32fast = "1.5"` - SIMD-optimized CRC32
 - `crc16 = "0.4"` - CRC16 for UPS
 - `md5 = "0.7"` - MD5 hashing
 
 ### Features
-- `rom-patcher-core` (workspace)
+- `stitchr-core` (workspace)
 - `thiserror = "2.0"`
 - `crc32fast = "1.5"`
 - `md5 = "0.7"` (optional, feature-gated)
 - `minreq = "2.12"` (optional, for RetroAchievements)
 
 ### CLI
-- `rom-patcher-core` (workspace)
-- `rom-patcher-formats` (workspace)
-- `rom-patcher-features` (workspace)
+- `stitchr-core` (workspace)
+- `stitchr-formats` (workspace)
+- `stitchr-features` (workspace)
 - `anyhow = "1.0"`
 - `clap = "4.5"` - CLI parsing with derive
 
@@ -534,7 +534,7 @@ retroachievements = ["rom-patcher-features/retroachievements"]
 
 ### When Exploring Code
 
-1. **Use specific file paths**: Always reference files with full paths from `/home/user/rompatcher-rs/`
+1. **Use specific file paths**: Always reference files with full paths from `/home/user/stitchr/`
 2. **Understand layers**: Know which layer (core/formats/features/cli) you're working in
 3. **Check existing patterns**: Look at IPS, BPS, or UPS implementations as examples
 4. **Follow templates**: Use `FORMAT_TEMPLATE/` for new formats
@@ -581,18 +581,18 @@ retroachievements = ["rom-patcher-features/retroachievements"]
 ### Useful References
 
 **Example Implementations**:
-- Simple format: `/home/user/rompatcher-rs/crates/formats/src/ips/`
-- Complex format: `/home/user/rompatcher-rs/crates/formats/src/bps/`
-- With JSON: `/home/user/rompatcher-rs/crates/formats/src/ebp/`
-- With MD5: `/home/user/rompatcher-rs/crates/formats/src/rup/`
+- Simple format: `/home/user/stitchr/crates/formats/src/ips/`
+- Complex format: `/home/user/stitchr/crates/formats/src/bps/`
+- With JSON: `/home/user/stitchr/crates/formats/src/ebp/`
+- With MD5: `/home/user/stitchr/crates/formats/src/rup/`
 
 **Templates**:
-- Format template: `/home/user/rompatcher-rs/crates/formats/FORMAT_TEMPLATE/`
+- Format template: `/home/user/stitchr/crates/formats/FORMAT_TEMPLATE/`
 
 **Documentation**:
-- User guide: `/home/user/rompatcher-rs/README.md`
-- Contributing: `/home/user/rompatcher-rs/CONTRIBUTING.md`
-- Changelog: `/home/user/rompatcher-rs/CHANGELOG.md`
+- User guide: `/home/user/stitchr/README.md`
+- Contributing: `/home/user/stitchr/CONTRIBUTING.md`
+- Changelog: `/home/user/stitchr/CHANGELOG.md`
 
 ## Quick Reference Commands
 

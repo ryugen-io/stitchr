@@ -1,7 +1,7 @@
 //! Basic RUP application tests
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::rup::RupPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::rup::RupPatcher;
 use std::fs;
 
 #[test]

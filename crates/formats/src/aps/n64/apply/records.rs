@@ -1,6 +1,6 @@
 //! APS N64 record parsing and processing
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Process a single RLE record
 pub fn process_rle(

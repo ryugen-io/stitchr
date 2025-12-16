@@ -8,7 +8,7 @@ use super::constants::*;
 use super::helpers::*;
 use file::{FileMeta, parse_file_metadata};
 use records::apply_xor_records;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Apply RUP patch to ROM
 pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {

@@ -1,6 +1,6 @@
 //! Integration tests for --only flag with multiple modes
 
-use rom_patcher_cli::OnlyMode;
+use stitchr_cli::OnlyMode;
 
 /// Test that OnlyMode enum has expected variants
 #[test]

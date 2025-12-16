@@ -1,6 +1,6 @@
 //! RUP overflow handling (Append/Minify modes)
 
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 /// Apply overflow data in Append mode ('A')
 /// Used when target > source: appends XOR'd data

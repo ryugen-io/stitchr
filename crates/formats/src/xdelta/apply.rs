@@ -2,7 +2,6 @@
 
 use crate::xdelta::{
     address_cache::{AddressCache, decode_address},
-    checksum::adler32,
     code_table::get_default_code_table,
     constants::{
         VCD_ADD, VCD_APPHEADER, VCD_CODETABLE, VCD_COPY, VCD_DECOMPRESS, VCD_NOOP, VCD_RUN,
@@ -11,7 +10,8 @@ use crate::xdelta::{
     headers::{WindowHeader, calculate_target_size},
     parser::VcdiffParser,
 };
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
+use stitchr_features::validation::algorithms::adler32;
 use std::io::Read;
 
 pub fn apply_patch(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
@@ -63,7 +63,6 @@ pub fn apply_patch(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
     let mut target_window_position: u64 = 0;
 
     while !parser.is_eof() {
-        let window_start_pos = parser.position();
         let win_header = WindowHeader::decode(&mut parser)?;
 
         let add_run_data_offset = parser.position();
@@ -152,12 +151,14 @@ pub fn apply_patch(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
                             target.push(byte);
                             abs_addr += 1;
                         }
+                        add_run_data_index += size;
                     }
                     _ => return Err(PatchError::CorruptedData),
                 }
             }
         }
 
+        // Skip to next window (like RomPatcher.js does)
         let window_end_pos = parser.position()
             + win_header.add_run_data_length
             + win_header.instructions_length
@@ -165,19 +166,10 @@ pub fn apply_patch(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {
 
         parser.seek(window_end_pos)?;
 
-        // Verify Delta Length
-        if (window_end_pos - window_start_pos) != win_header.delta_length {
-            return Err(PatchError::Other(format!(
-                "VCDIFF window delta length mismatch: expected {}, got {}",
-                win_header.delta_length,
-                window_end_pos - window_start_pos
-            )));
-        }
-
         // Verify Adler32
         if let Some(expected_checksum) = win_header.adler32 {
             let window_data = &target[target_window_start_index..];
-            let actual_checksum = adler32(window_data);
+            let actual_checksum = adler32::compute(window_data);
             if actual_checksum != expected_checksum {
                 return Err(PatchError::ChecksumMismatch {
                     expected: expected_checksum,

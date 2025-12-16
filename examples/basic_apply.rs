@@ -5,8 +5,8 @@
 //!
 //! Run with: cargo run --example basic_apply
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ips::IpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ips::IpsPatcher;
 use std::fs;
 
 fn main() -> anyhow::Result<()> {

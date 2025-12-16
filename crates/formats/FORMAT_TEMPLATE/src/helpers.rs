@@ -1,8 +1,8 @@
 //! FORMAT_NAME helper functions
 
 use super::constants::*;
-use crc32fast;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
+use stitchr_features::validation::algorithms::crc32;
 
 /// Parse FORMAT_NAME header
 pub fn parse_header(patch: &[u8]) -> Result<(u64, u64, usize)> {

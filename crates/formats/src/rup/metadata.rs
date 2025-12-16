@@ -3,7 +3,7 @@
 use super::constants::*;
 use super::helpers;
 use super::varint::decode_vlv;
-use rom_patcher_core::{PatchError, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchError, PatchMetadata, PatchType, Result};
 
 /// RUP patch metadata (header fields)
 #[derive(Debug, Clone, PartialEq)]

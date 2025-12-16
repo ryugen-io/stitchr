@@ -1,5 +1,5 @@
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::bdf::{BdfPatcher, constants::BDF_MAGIC};
+use stitchr_core::PatchFormat;
+use stitchr_formats::bdf::{BdfPatcher, constants::BDF_MAGIC};
 
 #[test]
 fn test_metadata_simple() {
@@ -10,7 +10,7 @@ fn test_metadata_simple() {
     patch.extend_from_slice(&1024u64.to_le_bytes()); // patched_size
 
     let metadata = BdfPatcher::metadata(&patch).unwrap();
-    assert_eq!(metadata.patch_type, rom_patcher_core::PatchType::Bdf);
+    assert_eq!(metadata.patch_type, stitchr_core::PatchType::Bdf);
 
     // extra is Vec<(String, String)>
     let find_extra = |key: &str| -> Option<String> {

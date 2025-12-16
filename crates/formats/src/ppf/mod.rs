@@ -9,7 +9,7 @@ pub mod helpers;
 pub mod metadata;
 pub mod validate;
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, Result};
 
 /// PPF format patcher
 pub struct PpfPatcher;

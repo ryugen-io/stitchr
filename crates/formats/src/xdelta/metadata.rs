@@ -1,6 +1,6 @@
 //! xdelta metadata extraction
 
-use rom_patcher_core::{PatchError, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchError, PatchMetadata, PatchType, Result};
 
 use super::validate;
 

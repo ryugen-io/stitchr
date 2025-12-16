@@ -1,6 +1,6 @@
 //! Action execution context
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Context for action execution
 pub struct ActionContext<'a> {

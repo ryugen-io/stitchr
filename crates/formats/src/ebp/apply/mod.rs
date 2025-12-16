@@ -1,7 +1,7 @@
 //! EBP patch application
 
 use crate::ips::IpsPatcher;
-use rom_patcher_core::{PatchFormat, Result};
+use stitchr_core::{PatchFormat, Result};
 
 /// Apply EBP patch to ROM
 /// Delegates to IPS implementation since EBP is IPS with metadata

@@ -1,7 +1,7 @@
 //! IPS error handling tests
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ebp::EbpPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ebp::EbpPatcher;
 
 #[test]
 fn test_apply_invalid_patch() {

@@ -5,7 +5,7 @@ mod only;
 mod output;
 
 use anyhow::{Context, Result};
-use rom_patcher_formats::detect_format;
+use stitchr_formats::detect_format;
 use std::path::PathBuf;
 
 /// Apply a patch to a ROM file with transactional safety
@@ -21,7 +21,7 @@ pub fn execute(
     patch_path: Option<PathBuf>,
     output_path: Option<PathBuf>,
     verify: bool,
-    only_modes: Vec<rom_patcher_cli::OnlyMode>,
+    only_modes: Vec<stitchr_cli::OnlyMode>,
     verbose: u8,
 ) -> Result<()> {
     // Generate default output path if not specified (not needed for only-modes)
@@ -51,10 +51,10 @@ pub fn execute(
     if !only_modes.is_empty() {
         for mode in &only_modes {
             match mode {
-                rom_patcher_cli::OnlyMode::Ra => {
+                stitchr_cli::OnlyMode::Ra => {
                     only::handle_ra_mode(&rom_path, verbose)?;
                 }
-                rom_patcher_cli::OnlyMode::Verify => {
+                stitchr_cli::OnlyMode::Verify => {
                     // Verify needs patch, handled below
                 }
             }
@@ -63,7 +63,7 @@ pub fn execute(
         // If only Ra mode (no verify), we're done
         if !only_modes
             .iter()
-            .any(|m| matches!(m, rom_patcher_cli::OnlyMode::Verify))
+            .any(|m| matches!(m, stitchr_cli::OnlyMode::Verify))
         {
             return Ok(());
         }
@@ -93,7 +93,7 @@ pub fn execute(
     // Handle --only verify mode
     if only_modes
         .iter()
-        .any(|m| matches!(m, rom_patcher_cli::OnlyMode::Verify))
+        .any(|m| matches!(m, stitchr_cli::OnlyMode::Verify))
     {
         return only::handle_verify_mode(&original_rom, &patch_data, &patch_type);
     }

@@ -1,5 +1,5 @@
 use super::constants::*;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 #[derive(Debug)]
 pub struct GbaHeader {

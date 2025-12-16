@@ -11,4 +11,4 @@ pub mod validation;
 #[cfg(feature = "retroachievements")]
 pub mod retroachievements;
 
-pub use rom_patcher_core::*;
+pub use stitchr_core::*;

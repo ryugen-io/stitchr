@@ -1,6 +1,6 @@
 //! IPS (International Patching System) format support
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, Result};
 
 mod apply;
 mod constants;

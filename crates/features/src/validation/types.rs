@@ -5,6 +5,8 @@
 pub enum HashAlgorithm {
     /// CRC32 checksum
     Crc32,
+    /// Adler32 checksum
+    Adler32,
     /// MD5 hash
     Md5,
     /// SHA-1 hash

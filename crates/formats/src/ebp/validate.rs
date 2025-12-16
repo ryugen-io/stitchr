@@ -1,14 +1,14 @@
 //! EBP validation
 
 use super::constants::*;
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 /// Validate EBP patch format
 /// EBP is IPS-compatible, so we delegate to IPS validation
 pub fn validate(patch: &[u8]) -> Result<()> {
     // EBP uses same validation as IPS (magic + EOF + records)
     use crate::ips::IpsPatcher;
-    use rom_patcher_core::PatchFormat;
+    use stitchr_core::PatchFormat;
     IpsPatcher::validate(patch)
 }
 

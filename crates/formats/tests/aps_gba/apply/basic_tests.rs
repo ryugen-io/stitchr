@@ -1,8 +1,8 @@
 //! Basic APS GBA application tests
 
 use super::helpers::*;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::gba::ApsGbaPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::gba::ApsGbaPatcher;
 
 #[test]
 fn test_can_handle() {

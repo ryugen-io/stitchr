@@ -3,7 +3,7 @@
 use super::constants::*;
 use super::varint;
 use crc32fast;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Parse UPS header and return (input_size, output_size, data_offset)
 pub fn parse_header(patch: &[u8]) -> Result<(u64, u64, usize)> {

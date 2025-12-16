@@ -3,7 +3,7 @@
 pub mod gba;
 pub mod n64;
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, Result};
 
 /// APS format patcher
 pub struct ApsPatcher;
@@ -19,7 +19,7 @@ impl PatchFormat for ApsPatcher {
         } else if gba::ApsGbaPatcher::can_handle(patch) {
             gba::ApsGbaPatcher.apply(rom, patch)
         } else {
-            Err(rom_patcher_core::PatchError::InvalidFormat(
+            Err(stitchr_core::PatchError::InvalidFormat(
                 "Unknown APS variant".to_string(),
             ))
         }
@@ -31,7 +31,7 @@ impl PatchFormat for ApsPatcher {
         } else if gba::ApsGbaPatcher::can_handle(patch) {
             gba::ApsGbaPatcher::metadata(patch)
         } else {
-            Err(rom_patcher_core::PatchError::InvalidFormat(
+            Err(stitchr_core::PatchError::InvalidFormat(
                 "Unknown APS variant".to_string(),
             ))
         }
@@ -43,7 +43,7 @@ impl PatchFormat for ApsPatcher {
         } else if gba::ApsGbaPatcher::can_handle(patch) {
             gba::ApsGbaPatcher::validate(patch)
         } else {
-            Err(rom_patcher_core::PatchError::InvalidFormat(
+            Err(stitchr_core::PatchError::InvalidFormat(
                 "Unknown APS variant".to_string(),
             ))
         }
@@ -55,7 +55,7 @@ impl PatchFormat for ApsPatcher {
         } else if gba::ApsGbaPatcher::can_handle(patch) {
             gba::ApsGbaPatcher::verify(rom, patch, target)
         } else {
-            Err(rom_patcher_core::PatchError::InvalidFormat(
+            Err(stitchr_core::PatchError::InvalidFormat(
                 "Unknown APS variant".to_string(),
             ))
         }

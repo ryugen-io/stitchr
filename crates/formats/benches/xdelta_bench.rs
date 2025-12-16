@@ -1,6 +1,6 @@
 use divan::Bencher;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::xdelta::XdeltaPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::xdelta::XdeltaPatcher;
 
 fn main() {
     divan::main();

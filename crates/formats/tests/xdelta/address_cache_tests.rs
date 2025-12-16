@@ -1,7 +1,7 @@
 //! xdelta address cache tests
 
-use rom_patcher_formats::xdelta::address_cache::AddressCache;
-use rom_patcher_formats::xdelta::{
+use stitchr_formats::xdelta::address_cache::AddressCache;
+use stitchr_formats::xdelta::{
     address_cache::decode_address,
     constants::{VCD_MODE_HERE, VCD_MODE_SELF},
     parser::VcdiffParser,

@@ -4,7 +4,7 @@ pub mod helpers;
 pub mod metadata;
 pub mod validate;
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, PatchType, Result};
 
 pub struct ApsGbaPatcher;
 

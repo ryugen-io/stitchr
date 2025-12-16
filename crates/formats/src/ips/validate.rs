@@ -1,6 +1,6 @@
 //! IPS patch validation
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 use super::constants::{EOF_MARKER, HEADER};
 use super::io::{read_u16_be, read_u24_be};

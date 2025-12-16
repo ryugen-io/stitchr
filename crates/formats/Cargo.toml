@@ -1,5 +1,5 @@
 [package]
-name = "rom-patcher-formats"
+name = "stitchr-formats"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -9,7 +9,8 @@ repository.workspace = true
 description = "Patch format implementations (IPS, BPS, UPS, APS, EBP, RUP, PPF, xdelta)"
 
 [dependencies]
-rom-patcher-core = { path = "../core" }
+stitchr-core = { path = "../core" }
+stitchr-features = { path = "../features" }
 thiserror.workspace = true
 crc32fast = "1.5"
 crc16 = "0.4"
@@ -19,7 +20,7 @@ bzip2 = "0.4"
 
 [dev-dependencies]
 divan = "0.1"
-rom-patcher-features = { path = "../features" }
+stitchr-features = { path = "../features" }
 bzip2 = "0.4"
 
 [features]

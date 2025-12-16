@@ -7,7 +7,7 @@ mod metadata;
 mod validate;
 // mod varint;  // If needed
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, Result};
 
 pub struct FormatNamePatcher;
 

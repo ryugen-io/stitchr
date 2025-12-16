@@ -30,7 +30,7 @@ if [ ! -f "Cargo.toml" ]; then
 fi
 
 # Build the project
-cargo build --release -p rom-patcher-cli
+cargo build --release -p stitchr-cli
 
 # Verify build success
 BINARY_PATH="target/release/stitchr"

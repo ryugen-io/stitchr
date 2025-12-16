@@ -7,7 +7,7 @@ use std::path::PathBuf;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 const RA_API_BASE: &str = "https://retroachievements.org";
-const RA_USER_AGENT: &str = "rompatcherrs/0.1";
+const RA_USER_AGENT: &str = "stitchr/0.1";
 const RATE_LIMIT_MS: u64 = 500; // 500ms between requests
 
 /// Get path to rate limit file in XDG cache directory
@@ -19,7 +19,7 @@ fn get_rate_limit_file() -> Result<PathBuf, String> {
         PathBuf::from(home).join(".cache")
     };
 
-    let app_cache = cache_dir.join("rompatcherrs");
+    let app_cache = cache_dir.join("stitchr");
     fs::create_dir_all(&app_cache)
         .map_err(|e| format!("Failed to create cache directory: {}", e))?;
 

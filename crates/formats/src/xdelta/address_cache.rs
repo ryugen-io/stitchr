@@ -6,7 +6,7 @@ use crate::xdelta::{
     constants::{VCD_MODE_HERE, VCD_MODE_SELF},
     parser::VcdiffParser,
 };
-use rom_patcher_core::Result;
+use stitchr_core::Result;
 
 pub struct AddressCache {
     near_size: usize,

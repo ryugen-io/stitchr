@@ -1,7 +1,7 @@
 //! Verify-only mode handler
 
 use anyhow::{Context, Result};
-use rom_patcher_core::PatchType;
+use stitchr_core::PatchType;
 
 /// Handle --only verify mode
 pub fn handle_verify_mode(

@@ -1,6 +1,6 @@
 //! BPS varint decoding tests
 
-use rom_patcher_formats::bps::varint;
+use stitchr_formats::bps::varint;
 
 #[test]
 fn test_decode_single_byte() {

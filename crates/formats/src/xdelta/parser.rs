@@ -1,6 +1,6 @@
 //! VCDIFF parser primitive
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 use std::io::{Cursor, Read, Seek, SeekFrom};
 
 pub struct VcdiffParser<'a> {

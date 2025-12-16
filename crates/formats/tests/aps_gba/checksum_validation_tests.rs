@@ -1,7 +1,7 @@
 //! Integration tests for APS GBA with real ROM patches
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::gba::ApsGbaPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::gba::ApsGbaPatcher;
 use std::fs;
 use std::path::PathBuf;
 

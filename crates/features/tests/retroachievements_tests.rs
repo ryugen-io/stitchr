@@ -1,6 +1,6 @@
 //! Tests for RetroAchievements JSON parser
 
-use rom_patcher_features::retroachievements::parser::parse_game_id_response;
+use stitchr_features::retroachievements::parser::parse_game_id_response;
 
 #[test]
 fn test_parse_valid_response() {

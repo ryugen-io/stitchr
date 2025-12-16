@@ -10,7 +10,7 @@ pub mod validate;
 
 pub mod apply;
 
-use rom_patcher_core::{PatchError, PatchFormat, PatchMetadata, Result};
+use stitchr_core::{PatchError, PatchFormat, PatchMetadata, Result};
 
 /// EBP patch format handler
 pub struct EbpPatcher;

@@ -1,7 +1,7 @@
 //! UPS error handling tests
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ups::UpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ups::UpsPatcher;
 
 #[test]
 fn test_apply_invalid_patch() {

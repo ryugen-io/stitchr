@@ -1,4 +1,4 @@
-// Common test utilities for rom-patcher crates
+// Common test utilities for stitchr crates
 
 /// Generate a test ROM of specified size with repeating pattern
 pub fn generate_test_rom(size: usize, pattern: u8) -> Vec<u8> {

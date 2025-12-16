@@ -1,6 +1,6 @@
 //! UPS Variable-Length Value encoding/decoding
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Decode a UPS VLV from bytes
 /// Returns (value, bytes_read)

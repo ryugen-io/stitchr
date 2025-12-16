@@ -2,7 +2,7 @@
 
 use super::constants::{HEADER_SIZE, MAGIC, MAGIC_SIZE};
 use super::helpers;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Check if data is a valid RUP patch (magic header check)
 pub fn can_handle(data: &[u8]) -> bool {

@@ -11,7 +11,7 @@ mod record_validation;
 mod types;
 mod validation;
 
-use rom_patcher_core::{PatchFormat, PatchMetadata, PatchType, Result};
+use stitchr_core::{PatchFormat, PatchMetadata, PatchType, Result};
 
 /// APS N64 patcher
 pub struct ApsN64Patcher;

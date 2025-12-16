@@ -1,5 +1,5 @@
 [package]
-name = "rom-patcher-features"
+name = "stitchr-features"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -9,7 +9,7 @@ repository.workspace = true
 description = "Extended features for ROM patching (validation, hash checking, etc.)"
 
 [dependencies]
-rom-patcher-core = { path = "../core" }
+stitchr-core = { path = "../core" }
 thiserror.workspace = true
 crc32fast = "1.5"
 md5 = { version = "0.7", optional = true }

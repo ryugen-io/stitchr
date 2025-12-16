@@ -1,7 +1,7 @@
 //! SOURCE_READ action handler
 
 use super::ActionContext;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Execute SOURCE_READ action
 /// Copies bytes from ROM at current output position (not relative offset!)

@@ -1,7 +1,7 @@
 //! Validation tests for APS N64 format
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::aps::n64::ApsN64Patcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::aps::n64::ApsN64Patcher;
 
 #[test]
 fn test_can_handle() {

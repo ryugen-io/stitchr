@@ -1,4 +1,4 @@
-# Contributing to rompatcherrs
+# Contributing to stitchr
 
 ## Development Workflow
 

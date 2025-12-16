@@ -2,7 +2,7 @@
 
 use super::constants::*;
 use super::types::{ApsHeader, N64Header};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Parse APS header from patch data
 pub fn parse_header(patch: &[u8]) -> Result<(ApsHeader, usize)> {

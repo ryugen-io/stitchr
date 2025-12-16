@@ -1,8 +1,8 @@
 //! Integration tests for IPS with real ROM patches
 
 use super::helpers::*;
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ebp::EbpPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ebp::EbpPatcher;
 use std::fs;
 
 #[test]

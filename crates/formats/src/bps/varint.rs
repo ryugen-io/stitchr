@@ -3,7 +3,7 @@
 //! BPS uses a custom varint encoding that supports arbitrary file sizes.
 //! Each byte stores 7 bits of data, with the 8th bit as a continuation flag.
 
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Decode a variable-length integer from a byte slice
 ///

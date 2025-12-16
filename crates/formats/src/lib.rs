@@ -10,7 +10,7 @@
 //! - PPF (PlayStation Patch Format)
 //! - xdelta (Generic binary diff)
 
-use rom_patcher_core::{PatchFormat, PatchType};
+use stitchr_core::{PatchFormat, PatchType};
 
 #[cfg(feature = "ips")]
 pub mod ips;

@@ -1,7 +1,7 @@
 //! Tests for UPS metadata extraction
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_formats::ups::UpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_formats::ups::UpsPatcher;
 
 #[test]
 fn test_metadata_simple() {
@@ -26,7 +26,7 @@ fn test_metadata_simple() {
 
     let metadata = UpsPatcher::metadata(&patch).unwrap();
 
-    assert_eq!(metadata.patch_type, rom_patcher_core::PatchType::Ups);
+    assert_eq!(metadata.patch_type, stitchr_core::PatchType::Ups);
     assert_eq!(metadata.source_size, Some(10));
     assert_eq!(metadata.target_size, Some(20));
     assert!(metadata.source_checksum.is_some());

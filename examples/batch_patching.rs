@@ -7,9 +7,9 @@
 //!
 //! Run with: cargo run --example batch_patching
 
-use rom_patcher_core::PatchFormat;
-use rom_patcher_features::validation::algorithms::crc32;
-use rom_patcher_formats::ips::IpsPatcher;
+use stitchr_core::PatchFormat;
+use stitchr_features::validation::algorithms::crc32;
+use stitchr_formats::ips::IpsPatcher;
 use std::fs;
 use std::path::Path;
 

@@ -1,6 +1,6 @@
 //! UPS varint (VLV) decoding tests
 
-use rom_patcher_formats::ups::varint;
+use stitchr_formats::ups::varint;
 
 #[test]
 fn test_varint_decode() {

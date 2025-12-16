@@ -4,7 +4,7 @@
 
 use super::constants::*;
 use super::helpers::*;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Apply a FORMAT_NAME patch to a ROM
 pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {

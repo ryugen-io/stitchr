@@ -3,7 +3,7 @@
 use super::constants::*;
 use super::helpers::*;
 use super::varint;
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 
 /// Apply a UPS patch to a ROM
 pub fn apply(rom: &mut Vec<u8>, patch: &[u8]) -> Result<()> {

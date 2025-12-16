@@ -1,7 +1,7 @@
 #![no_main]
 use libfuzzer_sys::fuzz_target;
-use rom_patcher_formats::rup::RupPatcher;
-use rom_patcher_core::PatchFormat;
+use stitchr_formats::rup::RupPatcher;
+use stitchr_core::PatchFormat;
 
 fuzz_target!(|data: &[u8]| {
     let _ = RupPatcher::validate(data);

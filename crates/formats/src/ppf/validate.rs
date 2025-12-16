@@ -3,7 +3,7 @@
 //! This module provides functionality to validate PPF patch files.
 
 use crate::ppf::{constants::*, helpers::parse_header};
-use rom_patcher_core::{PatchError, Result};
+use stitchr_core::{PatchError, Result};
 use std::io::{Cursor, Read, Seek, SeekFrom};
 
 /// Checks if the provided data can be handled as a PPF patch.
