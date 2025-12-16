@@ -52,6 +52,14 @@ struct Cli {
     /// multiple)
     #[arg(long, value_enum, num_args = 1..)]
     only: Vec<OnlyMode>,
+
+    /// Verbose output (can be used multiple times)
+    #[arg(short, long, action = clap::ArgAction::Count)]
+    verbose: u8,
+
+    /// Quiet output (no stdout, only errors)
+    #[arg(short, long)]
+    quiet: bool,
 }
 
 fn main() -> Result<()> {
@@ -63,5 +71,13 @@ fn main() -> Result<()> {
         anyhow::bail!("Patch file is required (unless using --only ra)");
     }
 
-    commands::apply::execute(cli.rom, cli.patch, cli.output, cli.verify, only_modes)
+    commands::apply::execute(
+        cli.rom,
+        cli.patch,
+        cli.output,
+        cli.verify,
+        only_modes,
+        cli.verbose,
+        cli.quiet,
+    )
 }

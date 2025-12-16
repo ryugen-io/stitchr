@@ -26,39 +26,11 @@ A modern, modular ROM patcher written in Rust supporting multiple patch formats.
 ### Implemented
 - **Apply patches:** IPS, BPS, UPS, APS N64, APS GBA, EBP, RUP, PPF, xdelta, BDF formats with automatic detection
 - **Validation:** Optional CRC32/Adler32 verification via --verify flag
-- **Hashing:** CRC32, Adler32, and MD5 computation
+- **Hashing:** CRC32, Adler32, MD5, SHA-1, and SHA-256 computation
 - **RetroAchievements:** Console detection + hash verification
 - **Console Support:** GB/GBC/GBA, NDS, 3DS, PSX/PS2/PSP, SNES, NES, N64, Genesis, Master System, Game Gear
 - **Safety:** Transactional patching with automatic rollback on error
-
-### Planned
-- SHA-1, SHA-256 checksums
-- Additional output options and verbosity controls
-
-## Installation
-
-### One-Liner (Recommended)
-
-Install `stitchr` instantly with our automated installer (requires `curl` and `cargo`):
-
-```bash
-bash <(curl -s https://raw.githubusercontent.com/ryugen-io/stitchr/master/install.sh)
-```
-
-This will:
-1. Build the project in release mode
-2. Install the binary to `~/.local/bin`
-3. Verify your PATH configuration
-
-### Manual
-
-Clone the repository and run the install script:
-
-```bash
-git clone https://github.com/ryugen-io/stitchr.git
-cd stitchr
-./install.sh
-```
+- **Verbosity:** `-v` (verbose) and `-q` (quiet) output controls
 
 ## Architecture
 

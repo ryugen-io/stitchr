@@ -2,7 +2,7 @@
 
 use rom_patcher_core::{PatchError, Result};
 
-use super::algorithms::md5;
+use super::algorithms::{md5, sha};
 use super::trait_def::ValidationFeature;
 use super::types::HashAlgorithm;
 
@@ -32,12 +32,12 @@ impl Validator {
                 hash.as_bytes().to_vec()
             }
             HashAlgorithm::Sha1 => {
-                // Not implemented
-                vec![]
+                let hash = sha::compute_sha1(data);
+                hash.as_bytes().to_vec()
             }
             HashAlgorithm::Sha256 => {
-                // Not implemented
-                vec![]
+                let hash = sha::compute_sha256(data);
+                hash.as_bytes().to_vec()
             }
         }
     }
