@@ -1,6 +1,7 @@
 //! Output file writing with atomic rename and checksum display
 
 use anyhow::{Context, Result};
+use log::{debug, info};
 use std::fs;
 use std::path::Path;
 
@@ -11,18 +12,15 @@ pub fn write_patched_rom(
     patched_rom: &[u8],
     original_size: usize,
     output_path: &Path,
-    verbose: u8,
 ) -> Result<()> {
     // Write to temp file first, then atomic rename
     let temp_path = output_path.with_extension("tmp");
-    if verbose > 0 {
-        println!("Writing temporary output: {}", temp_path.display());
-    }
+    debug!("Writing temporary output: {}", temp_path.display());
     fs::write(&temp_path, patched_rom).context("Failed to write temporary output file")?;
     fs::rename(&temp_path, output_path).context("Failed to finalize output file")?;
 
     println!("Successfully patched: {}", output_path.display());
-    println!("ROM size: {} → {} bytes", original_size, patched_rom.len());
+    info!("ROM size: {} -> {} bytes", original_size, patched_rom.len());
 
     // Always show output checksum
     #[cfg(feature = "validation")]
@@ -37,7 +35,7 @@ pub fn write_patched_rom(
     // RetroAchievements hash check (if enabled)
     #[cfg(feature = "retroachievements")]
     {
-        crate::utils::retroachievements::check_and_display(patched_rom, output_path, verbose);
+        crate::utils::retroachievements::check_and_display(patched_rom, output_path);
     }
 
     Ok(())

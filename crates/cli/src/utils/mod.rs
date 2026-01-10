@@ -1,5 +1,6 @@
 //! Utility functions
 
+pub mod logging;
 pub mod paths;
 
 #[cfg(feature = "validation")]

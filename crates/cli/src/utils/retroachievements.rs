@@ -1,5 +1,6 @@
 //! RetroAchievements hash checking utilities
 
+use log::{debug, error, info, trace, warn};
 use std::path::Path;
 use stitchr_features::retroachievements::{
     Console, compute_n64_hash, compute_nds_hash, compute_nes_hash, compute_ps2_hash,
@@ -50,170 +51,132 @@ fn hash_algorithm_description(console: Console) -> &'static str {
 }
 
 /// Compute console-specific hash for RetroAchievements
-fn compute_ra_hash(
-    rom: &[u8],
-    path: &Path,
-    console: Console,
-    verbose: u8,
-) -> Result<String, String> {
-    if verbose > 0 {
-        println!("  Algorithm: {}", hash_algorithm_description(console));
-    }
+fn compute_ra_hash(rom: &[u8], path: &Path, console: Console) -> Result<String, String> {
+    info!("Algorithm: {}", hash_algorithm_description(console));
 
     match console {
         Console::Nes => {
-            if verbose > 1 {
-                let has_header = rom.len() >= 4 && &rom[0..4] == b"NES\x1a";
-                println!(
-                    "  iNES header: {}",
-                    if has_header {
-                        "detected (16 bytes)"
-                    } else {
-                        "not present"
-                    }
-                );
-                println!(
-                    "  Hashing: {} bytes",
-                    if has_header {
-                        rom.len() - 16
-                    } else {
-                        rom.len()
-                    }
-                );
-            }
+            let has_header = rom.len() >= 4 && &rom[0..4] == b"NES\x1a";
+            debug!(
+                "iNES header: {}",
+                if has_header {
+                    "detected (16 bytes)"
+                } else {
+                    "not present"
+                }
+            );
+            trace!(
+                "Hashing: {} bytes",
+                if has_header {
+                    rom.len() - 16
+                } else {
+                    rom.len()
+                }
+            );
             Ok(compute_nes_hash(rom))
         }
         Console::Snes => {
-            if verbose > 1 {
-                let has_header = rom.len() > 512 && rom.len() % 8192 == 512;
-                println!(
-                    "  Copier header: {}",
-                    if has_header {
-                        "detected (512 bytes)"
-                    } else {
-                        "not present"
-                    }
-                );
-                println!(
-                    "  Hashing: {} bytes",
-                    if has_header {
-                        rom.len() - 512
-                    } else {
-                        rom.len()
-                    }
-                );
-            }
+            let has_header = rom.len() > 512 && rom.len() % 8192 == 512;
+            debug!(
+                "Copier header: {}",
+                if has_header {
+                    "detected (512 bytes)"
+                } else {
+                    "not present"
+                }
+            );
+            trace!(
+                "Hashing: {} bytes",
+                if has_header {
+                    rom.len() - 512
+                } else {
+                    rom.len()
+                }
+            );
             Ok(compute_snes_hash(rom))
         }
         Console::N64 => {
-            if verbose > 1 {
-                let format = if rom.len() >= 4 {
-                    match &rom[0..4] {
-                        [0x80, 0x37, 0x12, 0x40] => "Big Endian (.z64)",
-                        [0x40, 0x12, 0x37, 0x80] => "Little Endian (.n64)",
-                        [0x37, 0x80, 0x40, 0x12] => "Byte-swapped (.v64)",
-                        _ => "Unknown",
-                    }
-                } else {
-                    "Unknown"
-                };
-                println!("  ROM format: {}", format);
-                println!("  Converting to Big Endian for hash");
-            }
+            let format = if rom.len() >= 4 {
+                match &rom[0..4] {
+                    [0x80, 0x37, 0x12, 0x40] => "Big Endian (.z64)",
+                    [0x40, 0x12, 0x37, 0x80] => "Little Endian (.n64)",
+                    [0x37, 0x80, 0x40, 0x12] => "Byte-swapped (.v64)",
+                    _ => "Unknown",
+                }
+            } else {
+                "Unknown"
+            };
+            debug!("ROM format: {}", format);
+            trace!("Converting to Big Endian for hash");
             Ok(compute_n64_hash(rom))
         }
         Console::Nds => {
-            if verbose > 1 && rom.len() >= 0x160 {
+            if rom.len() >= 0x160 {
                 let arm9_offset = u32::from_le_bytes([rom[0x20], rom[0x21], rom[0x22], rom[0x23]]);
                 let arm9_size = u32::from_le_bytes([rom[0x2C], rom[0x2D], rom[0x2E], rom[0x2F]]);
                 let arm7_offset = u32::from_le_bytes([rom[0x30], rom[0x31], rom[0x32], rom[0x33]]);
                 let arm7_size = u32::from_le_bytes([rom[0x3C], rom[0x3D], rom[0x3E], rom[0x3F]]);
                 let icon_offset = u32::from_le_bytes([rom[0x68], rom[0x69], rom[0x6A], rom[0x6B]]);
-                println!("  Header: 0x160 bytes");
-                println!(
-                    "  ARM9: offset=0x{:X}, size={} bytes",
-                    arm9_offset, arm9_size
-                );
-                println!(
-                    "  ARM7: offset=0x{:X}, size={} bytes",
-                    arm7_offset, arm7_size
-                );
-                println!("  Icon/Title: offset=0x{:X}, size=0xA00 bytes", icon_offset);
+                debug!("Header: 0x160 bytes");
+                debug!("ARM9: offset=0x{:X}, size={} bytes", arm9_offset, arm9_size);
+                debug!("ARM7: offset=0x{:X}, size={} bytes", arm7_offset, arm7_size);
+                trace!("Icon/Title: offset=0x{:X}, size=0xA00 bytes", icon_offset);
             }
             compute_nds_hash(rom)
         }
         Console::Psx => {
-            if verbose > 1 {
-                println!("  Parsing ISO9660 filesystem...");
-                println!("  Reading SYSTEM.CNF for BOOT= executable");
-            }
+            debug!("Parsing ISO9660 filesystem...");
+            trace!("Reading SYSTEM.CNF for BOOT= executable");
             compute_psx_hash(path)
         }
         Console::Ps2 => {
-            if verbose > 1 {
-                println!("  Parsing ISO9660 filesystem...");
-                println!("  Reading SYSTEM.CNF for BOOT2= executable");
-            }
+            debug!("Parsing ISO9660 filesystem...");
+            trace!("Reading SYSTEM.CNF for BOOT2= executable");
             compute_ps2_hash(path)
         }
         Console::Psp => {
-            if verbose > 1 {
-                println!("  Parsing ISO9660 filesystem...");
-                println!("  Reading PSP_GAME/PARAM.SFO");
-                println!("  Reading PSP_GAME/SYSDIR/EBOOT.BIN");
-            }
+            debug!("Parsing ISO9660 filesystem...");
+            trace!("Reading PSP_GAME/PARAM.SFO");
+            trace!("Reading PSP_GAME/SYSDIR/EBOOT.BIN");
             compute_psp_hash(path)
         }
         // For cartridge-based systems without special handling, just MD5 the whole ROM
         _ => {
-            if verbose > 1 {
-                println!("  Hashing full ROM: {} bytes", rom.len());
-            }
+            trace!("Hashing full ROM: {} bytes", rom.len());
             Ok(md5::compute(rom))
         }
     }
 }
 
 /// Compute and display RetroAchievements info for patched ROM
-pub fn check_and_display(rom: &[u8], output_path: &Path, verbose: u8) {
+pub fn check_and_display(rom: &[u8], output_path: &Path) {
     // Only check for supported consoles
     let Some(mut console) = detect_console(output_path) else {
-        if verbose > 0 {
-            println!("\nRetroAchievements: Unsupported file extension");
-        }
+        warn!("RetroAchievements: Unsupported file extension");
         return;
     };
 
-    if verbose > 0 {
-        println!("\nDetected console from extension: {:?}", console);
-    }
+    info!("Detected console from extension: {:?}", console);
 
     // For ISO files, distinguish between PS2 and PSP by checking content
     if console == Console::Ps2 {
-        if verbose > 1 {
-            println!("  Checking ISO content for PSP signature...");
-        }
+        debug!("Checking ISO content for PSP signature...");
         if is_psp_iso(rom) {
-            if verbose > 0 {
-                println!("  PSP_GAME found - reclassifying as PSP");
-            }
+            info!("PSP_GAME found - reclassifying as PSP");
             console = Console::Psp;
-        } else if verbose > 1 {
-            println!("  No PSP signature - keeping as PS2");
+        } else {
+            trace!("No PSP signature - keeping as PS2");
         }
     }
 
     // Compute console-specific hash
-    if verbose > 0 {
-        println!("\nComputing RetroAchievements hash:");
-    }
-    let md5_hash = match compute_ra_hash(rom, output_path, console, verbose) {
+    info!("Computing RetroAchievements hash...");
+    let md5_hash = match compute_ra_hash(rom, output_path, console) {
         Ok(hash) => hash,
         Err(e) => {
             println!("\nRetroAchievements compatibility:");
             println!("  Console: {:?}", console);
-            println!("  Status: Hash computation failed");
-            println!("  Error: {}", e);
+            error!("Hash computation failed: {}", e);
             return;
         }
     };
@@ -223,24 +186,19 @@ pub fn check_and_display(rom: &[u8], output_path: &Path, verbose: u8) {
     println!("  MD5: {}", md5_hash);
 
     // Look up game on RA
-    if verbose > 0 {
-        println!("\nQuerying RetroAchievements API...");
-    }
+    debug!("Querying RetroAchievements API...");
     match lookup_game_by_hash(&md5_hash) {
         Ok(Some(game_id)) => {
             println!("  Status: Recognized by RetroAchievements");
             println!("  Game: {}", game_url(game_id));
-            if verbose > 0 {
-                println!("  Game ID: {}", game_id);
-            }
+            debug!("Game ID: {}", game_id);
         }
         Ok(None) => {
             println!("  Status: Not found in RetroAchievements database");
             println!("  Note: This ROM may not have achievements");
         }
         Err(e) => {
-            println!("  Status: API lookup failed");
-            println!("  Error: {}", e);
+            error!("API lookup failed: {}", e);
         }
     }
 }

@@ -60,6 +60,10 @@ struct Cli {
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
+
+    // Initialize logger based on verbose level
+    utils::logging::init(cli.verbose);
+
     let only_modes: Vec<OnlyModeLib> = cli.only.into_iter().map(|m| m.into()).collect();
 
     // Validate: patch is required unless --only ra
@@ -67,12 +71,5 @@ fn main() -> Result<()> {
         anyhow::bail!("Patch file is required (unless using --only ra)");
     }
 
-    commands::apply::execute(
-        cli.rom,
-        cli.patch,
-        cli.output,
-        cli.verify,
-        only_modes,
-        cli.verbose,
-    )
+    commands::apply::execute(cli.rom, cli.patch, cli.output, cli.verify, only_modes)
 }
